@@ -1,9 +1,13 @@
 # Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation
 <p align="center">
-<img src="images/maxresdefault.jpg">
+<img src="images/SFO.jpg">
 </p>
-This repository contains practical exercises for the Red Hat Summit 2019 Instructor-Led-Lab (ILL)<BR>
+This repository contains practical exercises for the Red Hat Summit 2020 Instructor-Led-Lab (ILL)<BR>
 <b>Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation.</b>
+<HR>
+<BR>
+<b>Additional new content for 2020 will be added to further enhance this lab experience. This lab should *not* be considered final until this message changes reflect that state.
+<BR>
 <HR>
 <b>Attendees will have hands-on access to Azure to perform the following tasks which build on one another:</b>
 
@@ -26,10 +30,6 @@ This repository contains practical exercises for the Red Hat Summit 2019 Instruc
 	* Launching an application in Azure Kubernetes Service (AKS).
 	* Serverless applications using Azure functions.
 
-Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) with assistance from [Steve Roach](https://github.com/grandparoach), [Sasha Rosenbaum](https://github.com/divineops), [Harold Wong](https://github.com/haroldwongms), [Jason De Lorme](https://github.com/ms-jasondel), [Michael Yen-Chi Ho](https://github.com/yenchiho), [Patrick Rutledge](https://github.com/rut31337), [Manesh Raveendran](https://github.com/Manesh-R) and others.
-
-Base implementation for Function App Docker container comes from here:
-
-https://github.com/Azure/azure-functions-docker-python-sample
+Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) and built from content originally presented at [Red Hat Summit 2019](https://github.com/stuartatmicrosoft/RedHatSummit2019).
 
 The content of this program can be re-delivered, on request, to any Microsoft customer seeking to deploy open source workloads on Azure.  Please contact stkirk@microsoft.com for additional details and to coordinate delivery of the program.
