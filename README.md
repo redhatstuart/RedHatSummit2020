@@ -1,11 +1,10 @@
 # Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation
-This repository contains practical exercises for the Red Hat Summit 2020 Instructor-Led-Lab (ILL)<BR>
-<b>Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation.</b>
+This repository contains practical exercises for the Red Hat Summit 2020 Instructor-Led-Lab (ILL), Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation.</b>
 <p align="center">
 <img src="images/SFO.jpg">
 </p>
 <HR>
-<b>Additional new content for 2020 will be added to further enhance this lab experience. This lab should *not* be considered final until this message changes reflect that state.
+#Additional new content for 2020 will be added to further enhance this lab experience. This lab should *not* be considered final until this message changes reflect that state.
 <BR>
 <HR>
 <b>Attendees will have hands-on access to Azure to perform the following tasks which build on one another:</b>
