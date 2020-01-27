@@ -5,7 +5,6 @@ This repository contains practical exercises for the Red Hat Summit 2020 Instruc
 </p>
 <HR>
 <h2>Additional new content for 2020 will be added to further enhance this lab experience. This lab should *not* be considered final until this message changes reflect that state.</h2>
-<BR>
 <HR>
 <b>Attendees will have hands-on access to Azure to perform the following tasks which build on one another:</b>
 
