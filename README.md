@@ -1,5 +1,5 @@
-# Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation
-This repository contains practical exercises for the Red Hat Summit 2020 Instructor-Led-Lab (ILL), Deploy and scale Microsoft Azure infrastructures and applications with Red Hat Ansible Automation.</b>
+# Deploy and scale Microsoft Azure Cloud Native infrastructures and applications with Red Hat Ansible Automation
+This repository contains practical exercises for the Red Hat Summit 2020 Instructor-Led-Lab (ILL), Deploy and scale Cloud Native Microsoft Azure infrastructures and applications with Red Hat Ansible Automation.</b>
 <p align="center">
 <img src="images/SFO.jpg">
 </p>
