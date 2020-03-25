@@ -103,8 +103,8 @@
                     "imageReference": {
                         "publisher": "RedHat",
                         "offer": "RHEL",
-                        "sku": "7-LVM",
-                        "version": "7.6.2018103108"
+                        "sku": "8-LVM",
+                        "version": "8.1.20200318"
                     },
                     "osDisk": {
                         "createOption": "fromImage",
