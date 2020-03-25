@@ -261,7 +261,7 @@
                 "autoUpgradeMinorVersion": true,
                 "settings": {
                     "fileUris": [
-                        "https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/provision-script.sh"
+                        "https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/provision-script.sh"
                     ],
                     "commandToExecute": "[concat(variables('customScriptCommand'),' ',variables('scriptName'),' ',parameters('azureUserName'),' ',parameters('azureUserPassword'),' ',variables('tenantId'),' ',variables('subscriptionId'),' ',parameters('applicationDisplayName'),' ',parameters('applicationSecretKey'),' ',parameters('applicationObjectId'),' ',parameters('applicationAppId'),' ',variables('scriptClose'))]"
                 }
