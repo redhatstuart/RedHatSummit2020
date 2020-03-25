@@ -26,10 +26,12 @@ echo "**************************************************************************
 	echo "Microsoft" | passwd --stdin root
 echo "********************************************************************************************"
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
-	yum -y install deltarpm >> /root/yum-output.log
-	wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-	yum -y localinstall epel-release-latest-7.noarch.rpm >> /root/yum-output.log
-	yum -y install policycoreutils-python libsemanage-devel gcc gcc-c++ kernel-devel python-devel libxslt-devel libffi-devel openssl-devel python2-pip iptables-services git telnet kubernetes-client >> /root/yum-output.log
+	yum -y install drpm >> /root/yum-output.log
+	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+#        yum -y install @python27 >> /root/yum-output.log
+#	yum -y localinstall epel-release-latest-8.noarch.rpm >> /root/yum-output.log
+        yum -y install @development
+#	yum -y install policycoreutils-python libsemanage-devel gcc gcc-c++ kernel-devel python-devel libxslt-devel libffi-devel openssl-devel python2-pip iptables-services git telnet kubernetes-client >> /root/yum-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Securing host and changing default SSH port to 2112" >>/root/provision-script-output.log
 	sed -i "s/dport 22/dport 2112/g" /etc/sysconfig/iptables
@@ -48,7 +50,8 @@ echo "**************************************************************************
 	yum -y install azure-cli >> /root/yum-output.log
 echo "********************************************************************************************"	
 	echo "`date` -- Adding package elements to enable graphical interface" >>/root/provision-script-output.log
-	yum -y groupinstall "Server with GUI" >> /root/yum-output.log
+#	yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
+	yum -y group install "Server with GUI" >> /root/yum-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Setting default systemd target to graphical.target" >>/root/provision-script-output.log
 	systemctl set-default graphical.target >> /root/provision-script-output.log
@@ -59,11 +62,11 @@ echo "**************************************************************************
         cd /usr/local
         tar xvfz v1.1.0.tar.gz
         ln -s /usr/local/noVNC-1.1.0/vnc.html /usr/local/noVNC-1.1.0/index.html
-        wget --quiet -P /etc/systemd/system https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/websockify.service
-	wget --quiet --no-check-certificate -P /etc/systemd/system "https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/vncserver@:4.service"
+        wget --quiet -P /etc/systemd/system https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/websockify.service
+	wget --quiet --no-check-certificate -P /etc/systemd/system "https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/vncserver@:4.service"
 	openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/pki/tls/certs/novnc.pem -out /etc/pki/tls/certs/novnc.pem -days 365 -subj "/C=US/ST=Michigan/L=Ann Arbor/O=Lift And Shift/OU=AzureAnsible/CN=itscloudy.af"
 	su -c "mkdir .vnc" - student
-	wget --quiet --no-check-certificate -P /home/student/.vnc https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/passwd
+	wget --quiet --no-check-certificate -P /home/student/.vnc https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/passwd
         chown student:student /home/student/.vnc/passwd
         chmod 600 /home/student/.vnc/passwd
 	iptables -I INPUT 1 -m tcp -p tcp --dport 6080 -j ACCEPT
@@ -80,7 +83,7 @@ echo "**************************************************************************
         pip install --upgrade openshift >> /root/pip-output.log
         pip install --upgrade requests >> /root/pip-output.log
         pip install --upgrade xmltodict >> /root/pip-outputlog
-        yum -y remove pyOpenSSL rhn-check rhn-client-tools rhn-setup rhn-setup-gnome rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
+#        yum -y remove pyOpenSSL rhn-check rhn-client-tools rhn-setup rhn-setup-gnome rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         pip install pyOpenSSL >> /root/pip-output.log
         pip install ansible==2.8.0rc3 >> /root/pip-output.log
         mkdir -p /etc/ansible
@@ -97,11 +100,11 @@ echo "**************************************************************************
         su -c "gconftool-2 -t bool -s /apps/rhsm-icon/hide_icon true" - student
 	su -c "ssh-keygen -t rsa -q -P '' -f /home/student/.ssh/id_rsa" - student
         mkdir -p /home/student/.local/share/keyrings
-	wget --quiet -P /home/student/.local/share/keyrings https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/Default.keyring
+	wget --quiet -P /home/student/.local/share/keyrings https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/Default.keyring
         chown student:student /home/student/.local/share/keyrings/Default.keyring
         restorecon /home/student/.local/share/keyrings/Default.keyring
 echo "********************************************************************************************"
-        wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/mongodb-org-4.1.repo 
+        wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/mongodb-org-4.1.repo 
         yum -y update kernel
         yum -y install mongodb mongodb-server nodejs
         npm install pm2@latest -g
@@ -132,7 +135,7 @@ echo AZ_SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID >> /home/student/Desktop/credentials
 echo SP_SECRET=$SP_SECRET >> /home/student/Desktop/credentials.txt
 #echo SP_OBJECT_ID=$SP_OBJECT_ID >> /home/student/Desktop/credentials.txt
 echo SP_APP_ID=$SP_APP_ID >> /home/student/Desktop/credentials.txt
-echo GUIDE_URL=https://github.com/stuartatmicrosoft/RedHatSummit2019 >> /home/student/Desktop/credentials.txt
+echo GUIDE_URL=https://github.com/stuartatmicrosoft/RedHatSummit2020 >> /home/student/Desktop/credentials.txt
 chown student:student /home/student/Desktop/credentials.txt
 
 echo "`date` --END-- Provision Script" >>/root/provision-script-output.log
