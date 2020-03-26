@@ -26,16 +26,15 @@ echo "**************************************************************************
 	echo "Microsoft" | passwd --stdin root
 echo "********************************************************************************************"
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
+        sed -i "s/=enforcing/=disabled/g" /etc/selinux/config
+        setenforce 0
+        echo "plugins=0" >> /etc/dnf/dnf.conf
 	yum -y install drpm >> /root/yum-output.log
         yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
         yum -y install @python27 >> /root/yum-output.log
         yum -y install @development >> /root/yum-output.log
         yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
-        cd /usr/share/xsessions
-        mv gnome.desktop gnome.desktop.old
-        mv gnome-xorg.desktop gnome-xorg.desktop.old
-        cp gnome-classic.desktop gnome.desktop
-        cp gnome-classic.desktop gnome-xorg.desktop
+        echo "student ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
         alternatives --set python /usr/bin/python2
         cd /usr/bin
         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -144,3 +143,5 @@ echo GUIDE_URL=https://github.com/stuartatmicrosoft/RedHatSummit2020 >> /home/st
 chown student:student /home/student/Desktop/credentials.txt
 
 echo "`date` --END-- Provision Script" >>/root/provision-script-output.log
+
+reboot
