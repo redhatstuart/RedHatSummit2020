@@ -26,14 +26,13 @@ echo "**************************************************************************
 	echo "Microsoft" | passwd --stdin root
 echo "********************************************************************************************"
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
-	yum -y install drpm >> /root/yum-output.log
-	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-        yum -y install @python27 >> /root/yum-output.log
+#	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 #	yum -y localinstall epel-release-latest-8.noarch.rpm >> /root/yum-output.log
+	yum -y install drpm >> /root/yum-output.log
+        yum -y install python2-devel python2-pip policycoreutils-python python-devel libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet  >> /root/yum-output.log
+        yum -y install @python27 >> /root/yum-output.log
         yum -y install @development
-	yum -y install python2-devel python2-pip  >> /root/yum-output.log
-	yum -y install policycoreutils-python python-devel python2-pip  >> /root/yum-output.log
-	yum -y install libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet >> /root/yum-output.log
+        yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
         alternatives --set python /usr/bin/python2
         cd /usr/bin
         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -54,15 +53,10 @@ echo "**************************************************************************
 	sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
 	yum -y install azure-cli >> /root/yum-output.log
 echo "********************************************************************************************"	
-	echo "`date` -- Adding package elements to enable graphical interface" >>/root/provision-script-output.log
-	yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
-#	yum -y group install "Server with GUI" >> /root/yum-output.log
-echo "********************************************************************************************"
 	echo "`date` -- Setting default systemd target to graphical.target" >>/root/provision-script-output.log
 	systemctl set-default graphical.target >> /root/provision-script-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
-#	yum -y install python-websockify python2-numpy tigervnc-server >> /root/yum-output.log
 	yum -y install python2-numpy tigervnc-server >> /root/yum-output.log
         pip2 install numpy websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
@@ -85,14 +79,13 @@ echo "**************************************************************************
 	systemctl start websockify.service
 echo "********************************************************************************************"
         echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
-        pip install --upgrade pip >> /root/pip-output.log
-        pip install --upgrade python-dateutil >> /root/pip-output.log
-        pip install --upgrade openshift >> /root/pip-output.log
-        pip install --upgrade requests >> /root/pip-output.log
-        pip install --upgrade xmltodict >> /root/pip-outputlog
-#        yum -y remove pyOpenSSL rhn-check rhn-client-tools rhn-setup rhn-setup-gnome rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
-        pip install pyOpenSSL >> /root/pip-output.log
-        pip install ansible==2.8.0rc3 >> /root/pip-output.log
+        pip-2.7 install --upgrade python-dateutil >> /root/pip-output.log
+        pip-2.7 install --upgrade openshift >> /root/pip-output.log
+        pip-2.7 install --upgrade requests >> /root/pip-output.log
+        pip-2.7 install --upgrade xmltodict >> /root/pip-outputlog
+        pip-2.7 install pyOpenSSL >> /root/pip-output.log
+        pip-2.7 install ansible==2.9.6 >> /root/pip-output.log
+        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         mkdir -p /etc/ansible
         echo "[ssh_connection]" > /etc/ansible/ansible.cfg
         echo "ssh_args = -o StrictHostKeyChecking=no" >> /etc/ansible/ansible.cfg
