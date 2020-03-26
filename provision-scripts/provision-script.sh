@@ -104,7 +104,7 @@ echo "**************************************************************************
         chown student:student /home/student/.local/share/keyrings/Default.keyring
         restorecon /home/student/.local/share/keyrings/Default.keyring
 echo "********************************************************************************************"
-        wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/mongodb-org-4.1.repo 
+        wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/mongodb-org-4.2.repo 
         yum -y update kernel
         yum -y install mongodb mongodb-server nodejs
         npm install pm2@latest -g
