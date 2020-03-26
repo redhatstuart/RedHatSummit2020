@@ -26,7 +26,6 @@ echo "**************************************************************************
 	echo "Microsoft" | passwd --stdin root
 echo "********************************************************************************************"
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
-        echo "plugins=0" >> /etc/dnf/dnf.conf
 	yum -y install drpm >> /root/yum-output.log
         yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
         yum -y install @python27 >> /root/yum-output.log
@@ -118,7 +117,8 @@ echo "**************************************************************************
         export MONGO_DBCONNECTION="mongodb://localhost:27017/nodejs-todo"
         mkdir -p /source/sample-apps/nodejs-todo/src
         cd /source/sample-apps/nodejs-todo/src   
-        git clone https://github.com/stuartatmicrosoft/node-todo .
+        git clone https://github.com/stuartatmicrosoft/nodejs-todo .
+        chown -R student:student /source
         npm install
         sed -i "s/8080/80/g" /source/sample-apps/nodejs-todo/src/server.js
         pm2 start server.js
