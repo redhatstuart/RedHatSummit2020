@@ -74,6 +74,9 @@ echo "**************************************************************************
         chmod 600 /home/student/.vnc/passwd
 	iptables -I INPUT 1 -m tcp -p tcp --dport 6080 -j ACCEPT
 	service iptables save
+        chmod 644 /etc/systemd/system/pm2-root.service
+        chmod 644 /etc/systemd/system/vncserver@\:4.service
+        chmod 644 /etc/systemd/system/websockify.service
         systemctl daemon-reload
         systemctl enable vncserver@:4.service
         systemctl enable websockify.service
