@@ -27,14 +27,16 @@ echo "**************************************************************************
 echo "********************************************************************************************"
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
         echo "plugins=0" >> /etc/dnf/dnf.conf
-        mkdir -p /var/lib/AccountsService/users
-        wget --quiet -P /var/lib/AccountsService/users https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/student
-        restorecon -rv /var/lib/AccountsService/users/student
 	yum -y install drpm >> /root/yum-output.log
         yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
         yum -y install @python27 >> /root/yum-output.log
         yum -y install @development >> /root/yum-output.log
         yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
+        cd /usr/share/xsessions
+        mv gnome.desktop gnome.desktop.old
+        mv gnome-xorg.desktop gnome-xorg.desktop.old
+        cp gnome-classic.desktop gnome.desktop
+        cp gnome-classic.desktop gnome-xorg.desktop
         alternatives --set python /usr/bin/python2
         cd /usr/bin
         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
@@ -124,6 +126,7 @@ echo "**************************************************************************
         pm2 startup systemd -u root
         systemctl start pm2-root
         service iptables save
+        yum -y update
 
 echo "`date` --END-- Provisioning" >>/root/provision-script-output.log
 
