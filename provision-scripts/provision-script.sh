@@ -29,7 +29,7 @@ echo "**************************************************************************
 #	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 #	yum -y localinstall epel-release-latest-8.noarch.rpm >> /root/yum-output.log
 	yum -y install drpm >> /root/yum-output.log
-        yum -y install python2-devel python2-pip policycoreutils-python python-devel libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet  >> /root/yum-output.log
+        yum -y install python2-devel python2-pip policycoreutils-python python-devel libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
         yum -y install @python27 >> /root/yum-output.log
         yum -y install @development
         yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
@@ -83,7 +83,7 @@ echo "**************************************************************************
         pip-2.7 install --upgrade openshift >> /root/pip-output.log
         pip-2.7 install --upgrade requests >> /root/pip-output.log
         pip-2.7 install --upgrade xmltodict >> /root/pip-outputlog
-        pip-2.7 install pyOpenSSL >> /root/pip-output.log
+        pip-2.7 install --upgrade pyOpenSSL >> /root/pip-output.log
         pip-2.7 install ansible==2.9.6 >> /root/pip-output.log
         yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         mkdir -p /etc/ansible
@@ -106,7 +106,7 @@ echo "**************************************************************************
 echo "********************************************************************************************"
         wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/mongodb-org-4.2.repo 
         yum -y update kernel
-        yum -y install mongodb mongodb-server nodejs
+        yum -y install mongodb-org 
         npm install pm2@latest -g
         systemctl enable mongod
         systemctl start mongod
@@ -114,7 +114,7 @@ echo "**************************************************************************
         export MONGO_DBCONNECTION="mongodb://localhost:27017/nodejs-todo"
         mkdir -p /source/sample-apps/nodejs-todo/src
         cd /source/sample-apps/nodejs-todo/src   
-        git clone https://github.com/dansand71/node-todo .
+        git clone https://github.com/stuartatmicrosoft/node-todo .
         npm install
         sed -i "s/8080/80/g" /source/sample-apps/nodejs-todo/src/server.js
         pm2 start server.js
