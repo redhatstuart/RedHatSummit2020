@@ -1,0 +1,6 @@
+#!/bin/sh
+DESKTOP_SESSION=gnome-classic
+export DESKTOP_SESSION
+env GNOME_SHELL_SESSION_MODE=classic gnome-session --session gnome-classic
+vncserver-virtual -kill $DISPLAY
+

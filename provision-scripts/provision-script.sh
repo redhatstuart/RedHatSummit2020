@@ -59,7 +59,7 @@ echo "**************************************************************************
 	systemctl set-default graphical.target >> /root/provision-script-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
-	yum -y install python2-numpy tigervnc-server >> /root/yum-output.log
+	yum -y install python2-numpy tigervnc-server tigervnc >> /root/yum-output.log
         pip-2.7 install numpy websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
@@ -70,8 +70,11 @@ echo "**************************************************************************
 	openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/pki/tls/certs/novnc.pem -out /etc/pki/tls/certs/novnc.pem -days 365 -subj "/C=US/ST=Michigan/L=Ann Arbor/O=Lift And Shift/OU=AzureAnsible/CN=itscloudy.af"
 	su -c "mkdir .vnc" - student
 	wget --quiet --no-check-certificate -P /home/student/.vnc https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/passwd
+	wget --quiet --no-check-certificate -P /home/student/.vnc https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/xstartup
         chown student:student /home/student/.vnc/passwd
+        chown student:student /home/student/.vnc/xstartup
         chmod 600 /home/student/.vnc/passwd
+        chmod 755 /home/student/.vnc/xstartup
 	iptables -I INPUT 1 -m tcp -p tcp --dport 6080 -j ACCEPT
 	service iptables save
         chmod 644 /etc/systemd/system/pm2-root.service
