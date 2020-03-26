@@ -144,4 +144,3 @@ chown student:student /home/student/Desktop/credentials.txt
 
 echo "`date` --END-- Provision Script" >>/root/provision-script-output.log
 
-reboot
