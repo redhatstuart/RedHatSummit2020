@@ -28,10 +28,15 @@ echo "**************************************************************************
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
 	yum -y install drpm >> /root/yum-output.log
 	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-#        yum -y install @python27 >> /root/yum-output.log
+        yum -y install @python27 >> /root/yum-output.log
 #	yum -y localinstall epel-release-latest-8.noarch.rpm >> /root/yum-output.log
         yum -y install @development
-#	yum -y install policycoreutils-python libsemanage-devel gcc gcc-c++ kernel-devel python-devel libxslt-devel libffi-devel openssl-devel python2-pip iptables-services git telnet kubernetes-client >> /root/yum-output.log
+	yum -y install python2-devel python2-pip  >> /root/yum-output.log
+	yum -y install policycoreutils-python python-devel python2-pip  >> /root/yum-output.log
+	yum -y install libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet >> /root/yum-output.log
+        alternatives --set python /usr/bin/python2
+        cd /usr/bin
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 echo "********************************************************************************************"
 	echo "`date` -- Securing host and changing default SSH port to 2112" >>/root/provision-script-output.log
 	sed -i "s/dport 22/dport 2112/g" /etc/sysconfig/iptables
@@ -50,14 +55,16 @@ echo "**************************************************************************
 	yum -y install azure-cli >> /root/yum-output.log
 echo "********************************************************************************************"	
 	echo "`date` -- Adding package elements to enable graphical interface" >>/root/provision-script-output.log
-#	yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
-	yum -y group install "Server with GUI" >> /root/yum-output.log
+	yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
+#	yum -y group install "Server with GUI" >> /root/yum-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Setting default systemd target to graphical.target" >>/root/provision-script-output.log
 	systemctl set-default graphical.target >> /root/provision-script-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
-	yum -y install python-websockify numpy tigervnc-server >> /root/yum-output.log
+#	yum -y install python-websockify python2-numpy tigervnc-server >> /root/yum-output.log
+	yum -y install python2-numpy tigervnc-server >> /root/yum-output.log
+        pip2 install numpy websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
         tar xvfz v1.1.0.tar.gz
