@@ -13,7 +13,7 @@ echo "`date` --BEGIN-- Provision Stage 1 Script" >>/root/provision-script-output
 echo "********************************************************************************************"
 	echo "`date` -- Setting Time Zone" >>/root/provision-script-output.log
 	echo "`date`" >>/root/provision-script-output.log
-	timedatectl set-timezone America/New_York >>/root/provision-script-output.log
+	timedatectl set-timezone America/Detroit >>/root/provision-script-output.log
 	echo "`date`" >>/root/provision-script-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Setting Student User password to 'Microsoft'" >>/root/provision-script-output.log
@@ -26,12 +26,14 @@ echo "**************************************************************************
 	echo "Microsoft" | passwd --stdin root
 echo "********************************************************************************************"
 	echo "`date` -- Adding 'deltarpm' and other required RPMs" >>/root/provision-script-output.log
-#	wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-#	yum -y localinstall epel-release-latest-8.noarch.rpm >> /root/yum-output.log
+        echo "plugins=0" >> /etc/dnf/dnf.conf
+        mkdir -p /var/lib/AccountsService/users
+        wget --quiet -P /var/lib/AccountsService/users https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/student
+        restorecon -rv /var/lib/AccountsService/users/student
 	yum -y install drpm >> /root/yum-output.log
-        yum -y install python2-devel python2-pip policycoreutils-python python-devel libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
+        yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
         yum -y install @python27 >> /root/yum-output.log
-        yum -y install @development
+        yum -y install @development >> /root/yum-output.log
         yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
         alternatives --set python /usr/bin/python2
         cd /usr/bin
@@ -58,7 +60,7 @@ echo "**************************************************************************
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
 	yum -y install python2-numpy tigervnc-server >> /root/yum-output.log
-        pip2 install numpy websockify
+        pip-2.7 install numpy websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
         tar xvfz v1.1.0.tar.gz
