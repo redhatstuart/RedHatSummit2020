@@ -27,7 +27,7 @@
 	*  Serverless - Explore Serverless computing and functions using Microsoft Azure
 
 <p align="center">
-<img src="images/Red-Hat-OpenShift-4_OG_1200x675.png" width="600">
+<a href="https://docs.microsoft.com/en-us/azure/openshift/howto-using-azure-redhat-openshift"><img src="images/Red-Hat-OpenShift-4_OG_1200x675.png" width="600"></a>
 
 Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) 
 
