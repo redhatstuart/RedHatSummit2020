@@ -87,13 +87,14 @@ echo "**************************************************************************
 	systemctl start websockify.service
 echo "********************************************************************************************"
         echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
-        pip-2.7 install --upgrade python-dateutil >> /root/pip-output.log
-        pip-2.7 install --upgrade openshift >> /root/pip-output.log
-        pip-2.7 install --upgrade requests >> /root/pip-output.log
-        pip-2.7 install --upgrade xmltodict >> /root/pip-outputlog
-        pip-2.7 install --upgrade pyOpenSSL >> /root/pip-output.log
-        pip-2.7 install ansible==2.9.6 >> /root/pip-output.log
-        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
+#        umask go-w
+#        pip-2.7 install --upgrade --user python-dateutil >> /root/pip-output.log
+#        pip-2.7 install --upgrade --user openshift >> /root/pip-output.log
+#        pip-2.7 install --upgrade requests >> /root/pip-output.log
+#        pip-2.7 install --upgrade xmltodict >> /root/pip-outputlog
+#        pip-2.7 install --upgrade pyOpenSSL >> /root/pip-output.log
+#        pip-2.7 install ansible==2.9.6 >> /root/pip-output.log
+#        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         mkdir -p /etc/ansible
         echo "[ssh_connection]" > /etc/ansible/ansible.cfg
         echo "ssh_args = -o StrictHostKeyChecking=no" >> /etc/ansible/ansible.cfg
