@@ -22,10 +22,14 @@
 	*  Big Data - Driving Big Data workloads using Azure HDInsight
 	*  HPC - Explore Azure virtual machine infiniband interconnects and parallel workloads
 	*  Kubernetes - Deploying a scalable application using Azure Kubernetes Service (AKS)
-	*  Migration - Containerizing an application & migrating to Cloud Native services (Azure Web Apps / Azure Container Registry / Azure CosmosDB)
+	*  Migration - Containerizing an application & migrating to Cloud Native services (Web Apps / Container Registry / CosmosDB)
 	*  OpenShift - Creating a new project and deploying it to Azure Red Hat OpenShift
 	*  Serverless - Explore Serverless computing and functions using Microsoft Azure
 
-Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) .
+<p align="center">
+<img src="images/Red-Hat-OpenShift-4_OG_1200x675.png" width="600">
+</p>
+
+Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) 
 
 The content of this program can be re-delivered, on request, to any Microsoft customer seeking to deploy open source workloads on Azure.  Please contact stkirk@microsoft.com for additional details and to coordinate delivery of the program.
