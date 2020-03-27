@@ -139,12 +139,10 @@ echo "`date` Creating Student Desktop Credentials File" >>/root/provision-script
 
 echo AZ_USER_NAME=$AZ_USER_NAME >> /home/student/Desktop/credentials.txt
 echo AZ_USER_PASSWORD=$AZ_USER_PASSWORD >> /home/student/Desktop/credentials.txt
-echo AZ_TENANT_ID=$AZ_TENANT_ID >> /home/student/Desktop/credentials.txt
+echo AZURE_CLIENT_ID=$SP_APP_ID >> /home/student/Desktop/credentials.txt
+echo AZURE_SECRET=$SP_SECRET >> /home/student/Desktop/credentials.txt
 echo AZ_SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID >> /home/student/Desktop/credentials.txt
-#echo SP_NAME=$SP_NAME >> /home/student/Desktop/credentials.txt
-echo SP_SECRET=$SP_SECRET >> /home/student/Desktop/credentials.txt
-#echo SP_OBJECT_ID=$SP_OBJECT_ID >> /home/student/Desktop/credentials.txt
-echo SP_APP_ID=$SP_APP_ID >> /home/student/Desktop/credentials.txt
+echo AZ_TENANT_ID=$AZ_TENANT_ID >> /home/student/Desktop/credentials.txt
 echo GUIDE_URL=https://github.com/stuartatmicrosoft/RedHatSummit2020 >> /home/student/Desktop/credentials.txt
 chown student:student /home/student/Desktop/credentials.txt
 
