@@ -49,6 +49,18 @@ echo "**************************************************************************
 	systemctl mask firewalld
 	systemctl enable iptables
 	systemctl start iptables	
+echo "********************************************************************************************"
+        echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
+        runuser -u student pip-2.7 install --upgrade --user python-dateutil
+        runuser -u student pip-2.7 install --upgrade --user openshift
+        runuser -u student pip-2.7 install --upgrade requests
+        runuser -u student pip-2.7 install --upgrade xmltodict
+        runuser -u student pip-2.7 install --upgrade pyOpenSSL
+        runuser -u student pip-2.7 install ansible==2.9.6
+        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
+        mkdir -p /etc/ansible
+        echo "[ssh_connection]" > /etc/ansible/ansible.cfg
+        echo "ssh_args = -o StrictHostKeyChecking=no" >> /etc/ansible/ansible.cfg
 echo "********************************************************************************************"	
 	echo "`date` -- Installing the Azure Linux CLI" >>/root/provision-script-output.log
 	rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -60,7 +72,8 @@ echo "**************************************************************************
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
 	yum -y install python2-numpy tigervnc-server tigervnc >> /root/yum-output.log
-        pip-2.7 install numpy websockify
+        pip-2.7 install --upgrade numpy 
+        pip-2.7 install --upgrade websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
         tar xvfz v1.1.0.tar.gz
@@ -85,19 +98,6 @@ echo "**************************************************************************
         systemctl enable websockify.service
         systemctl start vncserver@:4.service
 	systemctl start websockify.service
-echo "********************************************************************************************"
-        echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
-#        umask go-w
-#        pip-2.7 install --upgrade --user python-dateutil >> /root/pip-output.log
-#        pip-2.7 install --upgrade --user openshift >> /root/pip-output.log
-#        pip-2.7 install --upgrade requests >> /root/pip-output.log
-#        pip-2.7 install --upgrade xmltodict >> /root/pip-outputlog
-#        pip-2.7 install --upgrade pyOpenSSL >> /root/pip-output.log
-#        pip-2.7 install ansible==2.9.6 >> /root/pip-output.log
-#        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
-        mkdir -p /etc/ansible
-        echo "[ssh_connection]" > /etc/ansible/ansible.cfg
-        echo "ssh_args = -o StrictHostKeyChecking=no" >> /etc/ansible/ansible.cfg
 echo "********************************************************************************************"
 	echo "`date` -- Editing student's .bashrc and disabling Red Hat alerts" >> /root/provision-script-output.log
 	echo " " >> /home/student/.bashrc
