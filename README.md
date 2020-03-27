@@ -8,23 +8,23 @@
 <HR>
 <b>Deploy an application and leverage Cloud Native services to scale:</b>
 
-*  Working with the Azure Linux CLI
-*  Connecting Ansible to Microsoft Azure
-*  Create a Red Hat Enterprise Linux virtual machine in Azure using the Azure Marketplace.
-*  Create and configure an Azure MySQL PaaS database.
-*  Deploy an application on the RHEL virtual machine which utilizes the Azure MySQL PaaS database.
-*  Generalize the RHEL virtual machine image to create a golden image template for group deployments.
-*  Scale out the application to multiple servers using Azure virtual machine scale sets.
-*  Create an application gateway & load balancer to front-end the deployed application.
+	*  Working with the Azure Linux CLI
+	*  Connecting Ansible to Microsoft Azure
+	*  Create a Red Hat Enterprise Linux virtual machine in Azure using the Azure Marketplace.
+	*  Create and configure an Azure MySQL PaaS database.
+	*  Deploy an application on the RHEL virtual machine which utilizes the Azure MySQL PaaS database.
+	*  Generalize the RHEL virtual machine image to create a golden image template for group deployments.
+	*  Scale out the application to multiple servers using Azure virtual machine scale sets.
+	*  Create an application gateway & load balancer to front-end the deployed application.
 	
 <b>Or, choose to work on one of the individual labs below:</b>
 
-*  Big Data - Driving Big Data workloads using Azure HDInsight
-*  HPC - Explore Azure virtual machine infiniband interconnects and parallel workloads
-*  Kubernetes - Deploying a scalable application using Azure Kubernetes Service (AKS)
-*  Migration - Containerizing an application & migrating to Cloud Native services (Azure Web Apps / Azure Container Registry / Azure CosmosDB)
-*  OpenShift - Creating a new project and deploying it to Azure Red Hat OpenShift
-*  Serverless - Explore Serverless computing and functions using Microsoft Azure
+	*  Big Data - Driving Big Data workloads using Azure HDInsight
+	*  HPC - Explore Azure virtual machine infiniband interconnects and parallel workloads
+	*  Kubernetes - Deploying a scalable application using Azure Kubernetes Service (AKS)
+	*  Migration - Containerizing an application & migrating to Cloud Native services (Azure Web Apps / Azure Container Registry / Azure CosmosDB)
+	*  OpenShift - Creating a new project and deploying it to Azure Red Hat OpenShift
+	*  Serverless - Explore Serverless computing and functions using Microsoft Azure
 
 Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) .
 
