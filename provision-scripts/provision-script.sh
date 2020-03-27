@@ -101,10 +101,10 @@ echo "**************************************************************************
 	echo "`date` -- Editing student's .bashrc and disabling Red Hat alerts" >> /root/provision-script-output.log
 	echo " " >> /home/student/.bashrc
         echo "# Azure Service Principal Credentials" >> /home/student/.bashrc
-	echo "export AZURE_CLIENT_ID=" >> /home/student/.bashrc
-	echo "export AZURE_SECRET=" >> /home/student/.bashrc
-	echo "export AZURE_SUBSCRIPTION_ID=" >> /home/student/.bashrc
-	echo "export AZURE_TENANT=" >> /home/student/.bashrc
+	echo "export AZURE_CLIENT_ID=$SP_APP_ID" >> /home/student/.bashrc
+	echo "export AZURE_SECRET=$SP_SECRET" >> /home/student/.bashrc
+	echo "export AZURE_SUBSCRIPTION_ID=$AZ_SUBSCRIPTION_ID" >> /home/student/.bashrc
+	echo "export AZURE_TENANT=$AZ_TENANT_ID" >> /home/student/.bashrc
         su -c "gconftool-2 -t bool -s /apps/rhsm-icon/hide_icon true" - student
 	su -c "ssh-keygen -t rsa -q -P '' -f /home/student/.ssh/id_rsa" - student
         mkdir -p /home/student/.local/share/keyrings
