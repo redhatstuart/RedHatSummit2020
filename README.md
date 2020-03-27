@@ -1,12 +1,12 @@
 # Deploy and scale Microsoft Azure Cloud Native infrastructures and applications with Red Hat Ansible Automation
 This repository contains practical exercises for the Red Hat Summit 2020 Instructor-Led-Lab (ILL), Deploy and scale Cloud Native Microsoft Azure infrastructures and applications with Red Hat Ansible Automation.</b>
 <p align="center">
-<img src="images/SFO.jpg">
+<img src="images/microsoft-twitter.png">
 </p>
 <HR>
-<h2>Additional new content for 2020 will be added to further enhance this lab experience. This lab should *not* be considered final until this message changes reflect that state.</h2>
+<h2>Utilizing the Azure Linux CLI, these labs will allow you to interact with Azure to perform the following tasks using Ansible by Red Hat:</h2>
 <HR>
-<b>Attendees will have hands-on access to Azure to perform the following tasks which build on one another:</b>
+<b>Deploy an application and leverage Cloud Native services to scale:</b>
 
 	* Working with the Azure Linux CLI
 	* Connecting Ansible to Microsoft Azure
@@ -17,16 +17,15 @@ This repository contains practical exercises for the Red Hat Summit 2020 Instruc
 	* Scale out the application to multiple servers using Azure virtual machine scale sets.
 	* Create an application gateway & load balancer to front-end the deployed application.
 	
-<b>In addition, separate hands-on labs will be available to showcase:</b>
+<b>Or, choose to work on one of the individual labs below:</b>
 
-	* Big data workloads using Azure HDInsight.
-	* High-performance computing using Azure virtual machine infiniband interconnects.
-	* Deploying a private Azure Container Registry
-	* Hosting an Azure Application Service
-	* Running a containerized application using Azure Web Apps
-	* Launching an application in Azure Kubernetes Service (AKS).
-	* Serverless applications using Azure functions.
+	* Big Data - Driving Big Data workloads using Azure HDInsight
+	* HPC - Explore Azure virtual machine infiniband interconnects and parallel workloads
+        * Kubernetes - Deploying a scalable application using Azure Kubernetes Service (AKS)
+        * Migration - Containerizing an application & migrating to Cloud Native services (Azure Web Apps / Azure Container Registry / Azure CosmosDB)
+        * OpenShift - Creating a new project and deploying it to Azure Red Hat OpenShift
+	* Serverless - 
 
-Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) and built from content originally presented at [Red Hat Summit 2019](https://github.com/stuartatmicrosoft/RedHatSummit2019).
+Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) .
 
 The content of this program can be re-delivered, on request, to any Microsoft customer seeking to deploy open source workloads on Azure.  Please contact stkirk@microsoft.com for additional details and to coordinate delivery of the program.
