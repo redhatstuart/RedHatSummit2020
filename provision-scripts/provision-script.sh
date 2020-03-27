@@ -51,12 +51,12 @@ echo "**************************************************************************
 	systemctl start iptables	
 echo "********************************************************************************************"
         echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
-        runuser -u student pip-2.7 install --upgrade --user python-dateutil
-        runuser -u student pip-2.7 install --upgrade --user openshift
-        runuser -u student pip-2.7 install --upgrade requests
-        runuser -u student pip-2.7 install --upgrade xmltodict
-        runuser -u student pip-2.7 install --upgrade pyOpenSSL
-        runuser -u student pip-2.7 install ansible==2.9.6
+        runuser -l student -c "pip-2.7 install --upgrade --user python-dateutil"
+        runuser -l student -c "pip-2.7 install --upgrade --user openshift"
+        runuser -l student -c "pip-2.7 install --upgrade --user requests"
+        runuser -l student -c "pip-2.7 install --upgrade --user xmltodict"
+        runuser -l student -c "pip-2.7 install --upgrade pyOpenSSL"
+        runuser -l student -c "pip-2.7 install --user ansible==2.9.6"
         yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         mkdir -p /etc/ansible
         echo "[ssh_connection]" > /etc/ansible/ansible.cfg
