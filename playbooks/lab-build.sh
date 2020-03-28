@@ -12,22 +12,22 @@ fi
 
 # Variables
 RANDNUM="$(shuf -i 20000-50000 -n 1)"
-AZUREDC="$(az group list |grep 01 | awk '{print $2}')"
+AZUREDC="$(az group list -o table |grep 01 | awk '{print $2}')"
 RG="01"
 
 # Inputs
 echo "Welcome to the Red Hat Summit 2020 lab Deploy and scale Microsoft Azure Cloud Native infrastructures and applications with Red Hat Ansible Automation"
 echo "Please answer the following questions so that we can get your lab environment set up and you can begin working on your lab exercises."
 echo " "
-echo -n "What is your first name:  >"
+echo -n "What is your first name:  > "
 read first
-echo -n "What is your last name:  >"
+echo -n "What is your last name:  > "
 read last
-echo -n "What year were you born:  >"
+echo -n "What year were you born:  > "
 read year
-echo -n "What is your GitHub ID:  >"
+echo -n "What is your GitHub ID:  > "
 read githubid
-echo -n "What is your GitHub Personal Access Token:  >"
+echo -n "What is your GitHub Personal Access Token:  > "
 read gitpat
 
 echo " "

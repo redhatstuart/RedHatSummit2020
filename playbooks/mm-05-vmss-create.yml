@@ -75,7 +75,7 @@
         load_balancer: "{{ vm_name }}-mattermost-lb-{{ rnum }}"
 
     - name: Getting Public IP address of the LB
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-vmss-pip-{{ rnum }}"
       register: output

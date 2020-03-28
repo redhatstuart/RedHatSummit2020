@@ -24,7 +24,7 @@
       name: "{{ mysql_database_name }}"
 
   - name: Getting Public IP address of the application VM
-    azure_rm_publicipaddress_facts:
+    azure_rm_publicipaddress_info:
       resource_group: "{{ resource_group }}"
       name: "{{ vm_name }}-mattermost-master-pip-{{ rnum }}"
     register: output

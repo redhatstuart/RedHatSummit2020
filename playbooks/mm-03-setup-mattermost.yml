@@ -6,7 +6,7 @@
 
   tasks:
     - name: Get Mattermost VM IP Address
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-master-pip-{{ rnum }}"
       register: output

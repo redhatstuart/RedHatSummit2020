@@ -29,7 +29,7 @@
         application_gateway: '{{ vm_name }}-mattermost-ag'
 
     - name: Getting Public IP address of the Application Gateway
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-ag-pip-{{ rnum }}"
       register: output

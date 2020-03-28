@@ -7,7 +7,7 @@
   tasks:
 
     - name: Getting Public IP address of Compute Node 1
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute1-pip-{{ rnum }}"
       register: output1_pub
@@ -19,7 +19,7 @@
       register: output1_priv
 
     - name: Getting Public IP address of Compute Node 2
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute2-pip-{{ rnum }}"
       register: output2_pub
@@ -31,7 +31,7 @@
       register: output2_priv
 
     - name: Getting Public IP address of Compute Node 3
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute3-pip-{{ rnum }}"
       register: output3_pub
@@ -43,7 +43,7 @@
       register: output3_priv
 
     - name: Getting Public IP address of Master Node
-      azure_rm_publicipaddress_facts:
+      azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-master-pip-{{ rnum }}"
       register: output4_pub
