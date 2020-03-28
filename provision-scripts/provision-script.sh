@@ -51,12 +51,11 @@ echo "**************************************************************************
 	systemctl start iptables	
 echo "********************************************************************************************"
         echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
-        runuser -l student -c "pip-2.7 install --upgrade --user websockify"
         runuser -l student -c "pip-2.7 install --upgrade --user python-dateutil"
         runuser -l student -c "pip-2.7 install --upgrade --user openshift"
         runuser -l student -c "pip-2.7 install --upgrade --user requests"
         runuser -l student -c "pip-2.7 install --upgrade --user xmltodict"
-        runuser -l student -c "pip-2.7 install --upgrade pyOpenSSL"
+        runuser -l student -c "pip-2.7 install --upgrade --user pyOpenSSL"
         runuser -l student -c "pip-2.7 install --user ansible==2.9.6"
         yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         mkdir -p /etc/ansible
@@ -72,7 +71,7 @@ echo "**************************************************************************
 	systemctl set-default graphical.target >> /root/provision-script-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
-	yum -y install python2-numpy tigervnc-server tigervnc >> /root/yum-output.log
+	yum -y install tigervnc-server tigervnc >> /root/yum-output.log
 #        pip-2.7 install --upgrade websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
