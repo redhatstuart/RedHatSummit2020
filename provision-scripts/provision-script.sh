@@ -74,13 +74,15 @@ echo "**************************************************************************
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
 	yum -y install tigervnc-server tigervnc >> /root/yum-output.log
         pip-2.7 install numpy websockify
+        chmod -R a+rx /usr/lib64/python2.7/site-packages/numpy*
+        chmod -R a+rx /usr/lib/python2.7/site-packages/websockify*
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
         tar xvfz v1.1.0.tar.gz
         ln -s /usr/local/noVNC-1.1.0/vnc.html /usr/local/noVNC-1.1.0/index.html
         wget --quiet -P /etc/systemd/system https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/websockify.service
 	wget --quiet --no-check-certificate -P /etc/systemd/system "https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/vncserver@:4.service"
-	openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/pki/tls/certs/novnc.pem -out /etc/pki/tls/certs/novnc.pem -days 365 -subj "/C=US/ST=Michigan/L=Ann Arbor/O=Lift And Shift/OU=AzureAnsible/CN=itscloudy.af"
+	openssl req -x509 -nodes -newkey rsa:2048 -keyout /etc/pki/tls/certs/novnc.pem -out /etc/pki/tls/certs/novnc.pem -days 365 -subj "/C=US/ST=Michigan/L=Ann Arbor/O=RedHatSummit/OU=CloudNativeAzure/CN=microsoft.com"
 	su -c "mkdir .vnc" - student
 	wget --quiet --no-check-certificate -P /home/student/.vnc https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/passwd
 	wget --quiet --no-check-certificate -P /home/student/.vnc https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/xstartup
@@ -132,6 +134,7 @@ echo "**************************************************************************
         pm2 startup systemd -u root
         systemctl start pm2-root
         service iptables save
+echo "********************************************************************************************"
         chown -R student:student /home/student/.local
         chmod a+rx /home/student/.local
         yum -y update
