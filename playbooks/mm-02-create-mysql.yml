@@ -29,12 +29,11 @@
       name: "{{ vm_name }}-mattermost-master-pip-{{ rnum }}"
     register: output
 
-
   - name: Add MySQL Firewall Rule
     azure_rm_mysqlfirewallrule:
       resource_group: "{{ resource_group }}"
       server_name: "{{ vm_name }}-mattermost-mysql-{{ rnum }}"
       name: Mattermost_Rule
-      start_ip_address: "{{ output.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
-      end_ip_address: "{{ output.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+      start_ip_address: "{{ output.publicipaddresses[0].ip_address }}"
+      end_ip_address: "{{ output.publicipaddresses[0].ip_address }}"
 
