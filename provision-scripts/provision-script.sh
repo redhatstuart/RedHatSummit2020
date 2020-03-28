@@ -38,6 +38,7 @@ echo "**************************************************************************
         alternatives --set python /usr/bin/python2
         cd /usr/bin
         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+        chmod 755 /usr/bin/kubectl
 echo "********************************************************************************************"
 	echo "`date` -- Securing host and changing default SSH port to 2112" >>/root/provision-script-output.log
 	sed -i "s/dport 22/dport 2112/g" /etc/sysconfig/iptables
@@ -58,9 +59,9 @@ echo "**************************************************************************
         runuser -l student -c "pip-2.7 install --upgrade --user pyOpenSSL"
         runuser -l student -c "pip-2.7 install --user ansible==2.9.6"
         yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
-        mkdir -p /etc/ansible
-        echo "[ssh_connection]" > /etc/ansible/ansible.cfg
-        echo "ssh_args = -o StrictHostKeyChecking=no" >> /etc/ansible/ansible.cfg
+        echo "[ssh_connection]" > /home/student/.ansible.cfg
+        echo "ssh_args = -o StrictHostKeyChecking=no" >> /home/student/.ansible.cfg
+        chown student:student /home/student/.ansible.cfg
 echo "********************************************************************************************"	
 	echo "`date` -- Installing the Azure Linux CLI" >>/root/provision-script-output.log
 	rpm --import https://packages.microsoft.com/keys/microsoft.asc
@@ -72,7 +73,7 @@ echo "**************************************************************************
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
 	yum -y install tigervnc-server tigervnc >> /root/yum-output.log
-#        pip-2.7 install --upgrade websockify
+        pip-2.7 install numpy websockify
         wget --quiet -P /usr/local https://github.com/novnc/noVNC/archive/v1.1.0.tar.gz
         cd /usr/local
         tar xvfz v1.1.0.tar.gz
@@ -131,6 +132,8 @@ echo "**************************************************************************
         pm2 startup systemd -u root
         systemctl start pm2-root
         service iptables save
+        chown -R student:student /home/student/.local
+        chmod a+rx /home/student/.local
         yum -y update
 
 echo "`date` --END-- Provisioning" >>/root/provision-script-output.log
