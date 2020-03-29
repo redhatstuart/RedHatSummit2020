@@ -5,21 +5,25 @@
     - ./vars-myvars.yml
 
   tasks:
-    - name: Get Mattermost VM IP Address
+    - name: Get Mattermost Public IP Address Information
       azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-master-pip-{{ rnum }}"
       register: output
 
-    - name: Adding public IP to hosts
+    - name: Adding public IP to playbook group
       add_host:
         hostname: "{{ output.publicipaddresses[0].ip_address }}"
         groups: mmostserver
- 
+
+    - name: Saving FQDN of virtual machine
+      set_fact:
+        mmfqdn: "{{ output.publicipaddresses[0].dns_settings.fqdn }}"
+
 - name: Install Mattermost Server
   hosts: mmostserver
   remote_user: "{{ admin_username }}"
-  become: yes  
+  become: yes
   vars_files:
     - ./vars-myvars.yml
 
@@ -64,7 +68,8 @@
         mode: "g+w"
 
     - name: Configure Mattermost Data Source
-      command: "/bin/sed -i s+:mostest@tcp(dockerhost:3306)/mattermost_test+@{{ vm_name }}-mattermost-mysql-{{ rnum }}:{{ mysql_password }}@tcp({{ vm_name }}-mattermost-mysql-{{ rnum }}.mysql.database.azure.com:3306)/{{ mysql_database_name }}+g /opt/mattermost/config/config.json"
+      command: "/bin/sed -i s+:mostest@tcp(localhost:3306)/mattermost_test+@{{ vm_name }}-mattermost-mysql-{{ rnum }}:{{ mysql_password }}@tcp({{ vm_name }}
+-mattermost-mysql-{{ rnum }}.mysql.database.azure.com:3306)/{{ mysql_database_name }}+g /opt/mattermost/config/config.json"
       args:
         warn: false
 
@@ -95,3 +100,8 @@
     - name: Ensure firewalld is stopped
       systemd: name=firewalld state=stopped
       ignore_errors: yes
+
+    - name: Dump Mattermost FQDN
+      debug:
+        msg: "Mattermost Server FQDN: http://{{ hostvars['localhost']['mmfqdn'] }}:8065"
+

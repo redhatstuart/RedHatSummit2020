@@ -36,4 +36,5 @@
 
     - name: Dump Application Gateway Public IP
       debug:
-        msg: "FQDN: {{ output.ansible_facts.azure_publicipaddresses[0].properties.dnsSettings.fqdn }}"
+        msg: "Mattermost App Gateway FQDN: {{ output.publicipaddresses[0].dns_settings.fqdn }}"
+

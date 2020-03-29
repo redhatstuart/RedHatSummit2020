@@ -85,5 +85,6 @@
         resource_group: "{{ resource_group }}"
         server_name: "{{ vm_name }}-mattermost-mysql-{{ rnum }}"
         name: VMSS_Rule
-        start_ip_address: "{{ output.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
-        end_ip_address: "{{ output.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+        start_ip_address: "{{ output.publicipaddresses[0].ip_address }}"
+        end_ip_address: "{{ output.publicipaddresses[0].ip_address }}"
+
