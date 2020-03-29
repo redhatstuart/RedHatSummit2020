@@ -29,9 +29,6 @@
 
   tasks:
 
-    - name: Install EPEL repo config
-      command: "yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
-
     - name: Create Mattermost User
       user:
         name: mattermost
@@ -52,7 +49,7 @@
         path: /opt/mattermost
         state: directory
 
-    - name: Create Mattermost storage directory
+    - name: Create Mattermost data directory
       file:
         path: /opt/mattermost/data
         state: directory
@@ -72,8 +69,7 @@
         mode: "g+w"
 
     - name: Configure Mattermost Data Source
-      command: "/bin/sed -i s+:mostest@tcp(localhost:3306)/mattermost_test+@{{ vm_name }}-mattermost-mysql-{{ rnum }}:{{ mysql_password }}@tcp({{ vm_name }}
--mattermost-mysql-{{ rnum }}.mysql.database.azure.com:3306)/{{ mysql_database_name }}+g /opt/mattermost/config/config.json"
+      command: "/bin/sed -i s+:mostest@tcp(localhost:3306)/mattermost_test+@{{ vm_name }}-mattermost-mysql-{{ rnum }}:{{ mysql_password }}@tcp({{ vm_name }}-mattermost-mysql-{{ rnum }}.mysql.database.azure.com:3306)/{{ mysql_database_name }}+g /opt/mattermost/config/config.json"
       args:
         warn: false
 
@@ -104,9 +100,6 @@
     - name: Ensure firewalld is stopped
       systemd: name=firewalld state=stopped
       ignore_errors: yes
-
-    - name: Ensure jq is installed
-      yum: name=jq state=installed
 
     - name: Dump Mattermost FQDN
       debug:
