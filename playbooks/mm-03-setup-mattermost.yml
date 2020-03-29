@@ -28,6 +28,10 @@
     - ./vars-myvars.yml
 
   tasks:
+
+    - name: Install EPEL repo config
+      command: "yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm"
+
     - name: Create Mattermost User
       user:
         name: mattermost
@@ -100,6 +104,9 @@
     - name: Ensure firewalld is stopped
       systemd: name=firewalld state=stopped
       ignore_errors: yes
+
+    - name: Ensure jq is installed
+      yum: name=jq state=installed
 
     - name: Dump Mattermost FQDN
       debug:
