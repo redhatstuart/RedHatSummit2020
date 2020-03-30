@@ -12,26 +12,29 @@
         name: "{{ vm_name }}-hpc-master-pip-{{ rnum }}"
       register: output
 
+    - debug:
+        var: output
+
     - name: Adding Public IP to Ansible host group
       add_host:
-        hostname: "{{ output.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+        hostname: "{{ output.publicipaddresses[0].ip_address }}"
         groups: masternode
 
     - name: Setting Public IP variable
       set_fact:
-        masternode_ip: "{{ output.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"  
+        masternode_ip: "{{ output.publicipaddresses[0].ip_address }}"
 
 - name: Configure Master HPC Infrastructure Node
   hosts: masternode
   remote_user: "{{ admin_username }}"
-  become: yes  
+  become: yes
   vars_files:
     - ./vars-myvars.yml
 
   tasks:
 
     - name: Ensure deltarpm package is installed
-      yum: 
+      yum:
         name: deltarpm
         state: latest
 
@@ -167,7 +170,7 @@
       file:
         path: /share/home/.ansible/tmp
         state: directory
-        owner: hpcuser       
+        owner: hpcuser
         group: hpcuser
         mode: 0755
 
@@ -178,11 +181,11 @@
       args:
         creates: /share/home/.ssh/id_rsa.pub
         chdir: /share/home
- 
+
     - name: Creating SSH configuration file for hpc user
       lineinfile:
         owner: hpcuser
-        group: hpcuser 
+        group: hpcuser
         mode: 0644
         dest: /share/home/.ssh/config
         state: present
@@ -200,7 +203,7 @@
         dest: "/share/home/.ssh/authorized_keys"
         remote_src: yes
         owner: hpcuser
-        group: hpcuser 
+        group: hpcuser
         mode: preserve
 
     - name: Get fullpingpong.sh script
@@ -219,4 +222,3 @@
 
     - name: Restoring /share/home SELinux Context
       command: "restorecon -irv /share/home"
-
