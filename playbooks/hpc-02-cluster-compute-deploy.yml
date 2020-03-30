@@ -61,7 +61,7 @@
       state: present
       resource_group: "{{ resource_group }}"
 
-  - name: Create HPC Compute Node 1 VM 
+  - name: Create HPC Compute Node 1 VM
     azure_rm_virtualmachine:
       availability_set: "{{ vm_name }}-hpc-availset-{{ rnum }}"
       admin_username: "{{ admin_username }}"
@@ -79,8 +79,8 @@
       image:
         offer: Centos-HPC
         publisher: OpenLogic
-        sku: 7.4
-        version: 7.4.20180719
+        sku: 7.7
+        version: 7.7.2020031800
 
   - name: Create HPC Compute Node 2 VM
     azure_rm_virtualmachine:
@@ -100,10 +100,10 @@
       image:
         offer: Centos-HPC
         publisher: OpenLogic
-        sku: 7.4
-        version: 7.4.20180719
+        sku: 7.7
+        version: 7.7.2020031800
 
-  - name: Create HPC Comptue Node 3 VM
+  - name: Create HPC Compute Node 3 VM
     azure_rm_virtualmachine:
       availability_set: "{{ vm_name }}-hpc-availset-{{ rnum }}"
       admin_username: "{{ admin_username }}"
@@ -121,5 +121,5 @@
       image:
         offer: Centos-HPC
         publisher: OpenLogic
-        sku: 7.4
-        version: 7.4.20180719
+        sku: 7.7
+        version: 7.7.2020031800
