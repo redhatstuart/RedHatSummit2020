@@ -71,15 +71,15 @@
         offer: CentOS-LVM
         publisher: OpenLogic
         sku: 7-LVM
-        version: 7.6.20190130
+        version: 7.7.201912090
       data_disks:
         - lun: 0
-          disk_size_gb: 8 
-          managed_disk_type: Standard_LRS
-        - lun: 1 
           disk_size_gb: 8
           managed_disk_type: Standard_LRS
-        - lun: 2 
+        - lun: 1
+          disk_size_gb: 8
+          managed_disk_type: Standard_LRS
+        - lun: 2
           disk_size_gb: 8
           managed_disk_type: Standard_LRS
         - lun: 3
