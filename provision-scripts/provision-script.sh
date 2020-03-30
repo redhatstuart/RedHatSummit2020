@@ -59,7 +59,9 @@ echo "**************************************************************************
         runuser -l student -c "pip-2.7 install --upgrade --user pyOpenSSL"
         runuser -l student -c "pip-2.7 install --user ansible==2.9.6"
         yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
-        echo "[ssh_connection]" > /home/student/.ansible.cfg
+        echo "[defaults]" > /home/student/.ansible.cfg
+        echo "no_log = True" >> /home/student/.ansible.cfg
+        echo "[ssh_connection]" >> /home/student/.ansible.cfg
         echo "ssh_args = -o StrictHostKeyChecking=no" >> /home/student/.ansible.cfg
         chown student:student /home/student/.ansible.cfg
 echo "********************************************************************************************"	
