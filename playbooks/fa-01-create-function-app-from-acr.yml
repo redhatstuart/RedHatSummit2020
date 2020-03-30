@@ -26,7 +26,7 @@
       register: output
 
     - name: Obtain Azure Container Registry Facts
-      azure_rm_containerregistry_facts:
+      azure_rm_containerregistry_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}{{ rnum }}acr"
         retrieve_credentials: true

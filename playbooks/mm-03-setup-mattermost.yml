@@ -92,7 +92,10 @@
       systemd: state=started name=mattermost
 
     - name: Ensure firewalld is installed
-      yum: name=firewalld state=installed
+      yum: 
+        name: firewalld
+        state: installed
+        lock_timeout: 180
 
     - name: Ensure firewalld is disabled
       systemd: name=firewalld enabled=no

@@ -9,14 +9,14 @@
   tasks:
 
     - name: Obtain Azure Container Registry Facts
-      azure_rm_containerregistry_facts:
+      azure_rm_containerregistry_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}{{ rnum }}acr"
         retrieve_credentials: true
       register: acr_output
 
     - name: Obtain Cosmos DB Facts
-      azure_rm_cosmosdbaccount_facts:
+      azure_rm_cosmosdbaccount_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-cosmosdb"
         retrieve_keys: all
@@ -37,7 +37,7 @@
           registry_server_password: "{{ acr_output.registries[0].credentials.password }}"
 
     - name: Obtain Azure Web App Facts
-      azure_rm_webapp_facts:
+      azure_rm_webapp_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-todo-webapp"
       register: webapp_output

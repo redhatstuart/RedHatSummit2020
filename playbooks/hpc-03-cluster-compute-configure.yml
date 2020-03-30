@@ -103,14 +103,17 @@
       yum:
         name: deltarpm
         state: latest
+        lock_timeout: 180
 
     - name: Install the EPEL repository
       yum:
         name: epel-release
         state: latest
+        lock_timeout: 180
 
     - name: Ensure required RPM packages are installed
       yum:
+        lock_timeout: 180
         name:
           - nfs-utils
           - psmisc

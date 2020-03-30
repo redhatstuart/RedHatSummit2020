@@ -24,7 +24,7 @@
         database_account_offer_type: Standard
 
     - name: Obtain CosmosDB Facts
-      azure_rm_cosmosdbaccount_facts:
+      azure_rm_cosmosdbaccount_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-cosmosdb"
         retrieve_keys: all
