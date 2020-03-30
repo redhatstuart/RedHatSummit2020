@@ -56,22 +56,22 @@
 
     - name: Adding Public IP of Compute Node 1 to Ansible host group
       add_host:
-        hostname: "{{ output1_pub.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+        hostname: "{{ output1_pub.publicipaddresses[0].ip_address }}"
         groups: computenodes
 
     - name: Adding Public IP of Compute Node 2 to Ansible host group
       add_host:
-        hostname: "{{ output2_pub.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+        hostname: "{{ output2_pub.publicipaddresses[0].ip_address }}"
         groups: computenodes
 
     - name: Adding Public IP of Compute Node 3 to Ansible host group
       add_host:
-        hostname: "{{ output3_pub.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+        hostname: "{{ output3_pub.publicipaddresses[0].ip_address }}"
         groups: computenodes
 
     - name: Adding Public IP of Master node to Ansible host group
       add_host:
-        hostname: "{{ output4_pub.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+        hostname: "{{ output4_pub.publicipaddresses[0].ip_address }}"
         groups: masternode
 
     - name: Setting Private IP variable of Compute Node 1
@@ -93,12 +93,12 @@
 - name: Configure HPC Compute Nodes
   hosts: computenodes
   remote_user: "{{ admin_username }}"
-  become: yes  
+  become: yes
   vars_files:
     - ./vars-myvars.yml
 
   tasks:
- 
+
     - name: Ensure deltarpm package is installed
       yum:
         name: deltarpm
@@ -110,7 +110,7 @@
         state: latest
 
     - name: Ensure required RPM packages are installed
-      yum: 
+      yum:
         name:
           - nfs-utils
           - psmisc
@@ -123,7 +123,7 @@
           - glusterfs-libs
           - glusterfs
           - glusterfs-client-xlators
-          - glusterfs-fuse 
+          - glusterfs-fuse
           - libsemanage-python
           - libsemanage-devel
           - policycoreutils-python
