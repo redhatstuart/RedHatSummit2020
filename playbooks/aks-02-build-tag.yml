@@ -1,0 +1,51 @@
+- name: Use Podman to Build and Tag Service Tracker Containers
+  hosts: localhost
+  connection: local
+  no_log: false
+  vars_files:
+    - ./vars-myvars.yml
+
+  tasks:
+
+
+    - name: Build a basic OCI image with advanced parameters
+      podman_image:
+        name: data-api
+        path: "../service-tracker/app/data-api/."
+        tag: "aksdemo/data-api:v1.1"
+        build:
+          cache: no
+          force_rm: yes
+          format: docker
+      register: output
+
+    - debug:
+        var: output
+
+
+#    - name: Create an Azure Container Registry for AKS and Modernization Labs
+#      azure_rm_containerregistry:
+#        name: "{{ vm_name }}{{ rnum }}acr"
+#        resource_group: "{{ resource_group }}"
+#        admin_user_enabled: true
+#        sku: Premium
+#        tags:
+#            Release: Initial
+#            Environment: RedHatSummit
+#
+#    - name: "Query Azure Container Registry for credential information"
+#      azure_rm_containerregistry_info:
+#        name: "{{ vm_name }}{{ rnum }}acr"
+#        resource_group: "{{ resource_group }}"
+#        retrieve_credentials: "yes"
+#      register: acr_output
+#
+#    - debug:
+#        msg: "ACR Username: {{ acr_output.registries[0].name }}"
+#
+#    - debug:
+#        msg: "ACR Password: {{ acr_output.registries[0].credentials.password }}"
+#
+#    - debug:
+#        msg: "ACR Hostname: {{ acr_output.registries[0].login_server }}"
+#

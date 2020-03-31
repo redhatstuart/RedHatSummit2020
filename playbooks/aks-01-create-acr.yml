@@ -1,4 +1,4 @@
-- name: Create Azure Container Registry
+- name: Create Azure Container Registry 
   hosts: localhost
   connection: local
   no_log: false
