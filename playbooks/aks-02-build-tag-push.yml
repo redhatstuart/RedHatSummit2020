@@ -1,0 +1,126 @@
+- name: Use Podman to Build and Tag Service Tracker Containers
+  hosts: localhost
+  connection: local
+  no_log: false
+  vars_files:
+    - ./vars-myvars.yml
+
+  tasks:
+
+    - name: "Query Azure Container Registry for credential information"
+      azure_rm_containerregistry_info:
+        name: "{{ vm_name }}{{ rnum }}acr"
+        resource_group: "{{ resource_group }}"
+        retrieve_credentials: "yes"
+      register: acr_output
+
+    - name: Build Service Tracker DATA API container with Podman
+      podman_image:
+        name: data-api:v1.1
+        path: "../service-tracker/app/data-api"
+        tag: "aksdemo/data-api:v1.1"
+        build:
+          cache: yes
+          force_rm: yes
+          format: docker
+          rm: yes
+      become: yes
+
+    - name: Build Service Tracker FLIGHTS API container with Podman
+      podman_image:
+        name: flights-api:v1.1
+        path: "../service-tracker/app/flights-api"
+        tag: "aksdemo/flights-api:v1.1"
+        build:
+          cache: yes
+          force_rm: yes
+          format: docker
+          rm: yes
+      become: yes
+
+    - name: Build Service Tracker QUAKES API container with Podman
+      podman_image:
+        name: quakes-api:v1.1
+        path: "../service-tracker/app/quakes-api"
+        tag: "aksdemo/quakes-api:v1.1"
+        build:
+          cache: yes
+          force_rm: yes
+          format: docker
+          rm: yes
+      become: yes
+
+    - name: Build Service Tracker WEATHER API container with Podman
+      podman_image:
+        name: weather-api:v1.1
+        path: "../service-tracker/app/weather-api"
+        tag: "aksdemo/weather-api:v1.1"
+        build:
+          cache: yes
+          force_rm: yes
+          format: docker
+          rm: yes
+      become: yes
+
+    - name: Build Service Tracker User Interface container with Podman
+      podman_image:
+        name: service-tracker-ui:v1.1
+        path: "../service-tracker/app/service-tracker-ui"
+        tag: "aksdemo/service-tracker-ui:v1.1"
+        build:
+          cache: yes
+          force_rm: yes
+          format: docker
+          rm: yes
+      become: yes
+
+    - name: Push DATA API container to Azure Container Registry
+      podman_image:
+       name: data-api:v1.1
+       push: yes
+       username: "{{ acr_output.registries[0].name }}"
+       password: "{{ acr_output.registries[0].credentials.password }}"
+       push_args:
+         dest: "{{ acr_output.registries[0].login_server }}/aksdemo"
+      become: yes
+
+    - name: Push FLIGHTS API container to Azure Container Registry
+      podman_image:
+       name: flights-api:v1.1
+       push: yes
+       username: "{{ acr_output.registries[0].name }}"
+       password: "{{ acr_output.registries[0].credentials.password }}"
+       push_args:
+         dest: "{{ acr_output.registries[0].login_server }}/aksdemo"
+      become: yes
+
+    - name: Push QUAKES API container to Azure Container Registry
+      podman_image:
+       name: quakes-api:v1.1
+       push: yes
+       username: "{{ acr_output.registries[0].name }}"
+       password: "{{ acr_output.registries[0].credentials.password }}"
+       push_args:
+         dest: "{{ acr_output.registries[0].login_server }}/aksdemo"
+      become: yes
+
+    - name: Push WEATHER API container to Azure Container Registry
+      podman_image:
+       name: weather-api:v1.1
+       push: yes
+       username: "{{ acr_output.registries[0].name }}"
+       password: "{{ acr_output.registries[0].credentials.password }}"
+       push_args:
+         dest: "{{ acr_output.registries[0].login_server }}/aksdemo"
+      become: yes
+
+    - name: Push Service Tracker User Interface container to Azure Container Registry
+      podman_image:
+       name: service-tracker-ui:v1.1
+       push: yes
+       username: "{{ acr_output.registries[0].name }}"
+       password: "{{ acr_output.registries[0].credentials.password }}"
+       push_args:
+         dest: "{{ acr_output.registries[0].login_server }}/aksdemo"
+      become: yes
+
