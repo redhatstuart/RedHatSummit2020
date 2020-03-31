@@ -1,0 +1,52 @@
+- name: Deploy Service Tracker Containers into Azure Kubernetes Service
+  hosts: localhost
+  connection: local
+  no_log: false
+  vars_files:
+    - ./vars-myvars.yml
+
+  tasks:
+
+    - name: Create a k8s namespace in AKS for Service Tracker
+      k8s:
+        name: default
+        api_version: v1
+        kind: Namespace
+        state: present
+
+    - name: Apply MongoDB configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/mongodb.yaml"
+
+    - name: Apply DATA API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/data-api.yaml"
+
+    - name: Apply FLIGHTS API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/flights-api.yaml"
+
+    - name: Apply QUAKES API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/quakes-api.yaml"
+
+    - name: Apply WEATHER API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/weather-api.yaml"
+
+    - name: Apply Service Tracker User Interface configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/service-tracker-ui.yaml"
+
