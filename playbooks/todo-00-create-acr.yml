@@ -1,6 +1,7 @@
 - name: Create Azure Container Registry to modernize TODO Application
   hosts: localhost
   connection: local
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
 
@@ -15,26 +16,20 @@
         tags:
             Release: Initial
             Environment: RedHatSummit
+
+    - name: "Query Azure Container Registry for credential information"
+      azure_rm_containerregistry_info:
+        name: "{{ vm_name }}{{ rnum }}acr"
+        resource_group: "{{ resource_group }}"
+        retrieve_credentials: "yes"
       register: acr_output
 
-    - name: Getting ACR Username
-      set_fact:
-        acrusername: "{{ acr_output.name }}"
-
-    - name: Getting ACR Password
-      set_fact:
-        acrpassword: "{{ acr_output.credentials.password }}"
-
-    - name: Getting ACR Host
-      set_fact:
-        acrhostname: "{{ acr_output.login_server }}"
+    - debug:
+        msg: "ACR Username: {{ acr_output.registries[0].name }}"
 
     - debug:
-        msg: "ACR Username: {{ acrusername }}"
+        msg: "ACR Password: {{ acr_output.registries[0].credentials.password }}"
 
     - debug:
-        msg: "ACR Password: {{ acrpassword }}"
-
-    - debug:
-        msg: "ACR Hostname: {{ acrhostname }}"
+        msg: "ACR Hostname: {{ acr_output.registries[0].login_server }}"
 
