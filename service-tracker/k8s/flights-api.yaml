@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flights-api
+  labels:
+    name: flights-api
+spec:
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 3003
+    targetPort: 3003
+  selector:
+    app: flights-api
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flights-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flights-api
+  template:
+    metadata:
+      labels:
+        app: flights-api
+    spec:
+      containers:
+        - image: chzbrgr71/flights-api:v1.1
+          imagePullPolicy: Always
+          name: flights-api
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1024Mi"
+              cpu: "1000m"
+          env:
+            - name: DATA_SERVICE_URI
+              value: http://data-api.default.svc.cluster.local:3009/
+          ports:
+          - containerPort: 3003
+            protocol: TCP
+      restartPolicy: Always
