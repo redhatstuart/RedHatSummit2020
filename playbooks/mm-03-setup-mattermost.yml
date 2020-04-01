@@ -1,6 +1,7 @@
 - name: Determine IP address of Mattermost VM
   hosts: localhost
   connection: local
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
 
@@ -24,11 +25,11 @@
   hosts: mmostserver
   remote_user: "{{ admin_username }}"
   become: yes
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
 
   tasks:
-
     - name: Create Mattermost User
       user:
         name: mattermost
