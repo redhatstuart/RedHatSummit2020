@@ -1,9 +1,11 @@
 - name: Connect Mattermost Application Gateway to VMSS
   hosts: localhost
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
   roles:
     - ../modules
+
   tasks:
     - name: Update VMSS to use Application Gateway instead of Load Balancer
       azure_rm_virtualmachinescaleset:
