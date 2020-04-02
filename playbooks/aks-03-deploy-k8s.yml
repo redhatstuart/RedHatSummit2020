@@ -16,27 +16,27 @@
 
     - name: Merging Azure Container Registry hostname into DATA API k8s configuration
       command:
-        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}+g ../service-tracker/k8s/data-api.yaml"
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/data-api.yaml"
         warn: no
 
     - name: Merging Azure Container Registry hostname into FLIGHTS API k8s configuration
       command:
-        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}+g ../service-tracker/k8s/flights-api.yaml"
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/flights-api.yaml"
         warn: no
 
     - name: Merging Azure Container Registry hostname into QUAKES API k8s configuration
       command:
-        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}+g ../service-tracker/k8s/quakes-api.yaml"
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/quakes-api.yaml"
         warn: no
 
     - name: Merging Azure Container Registry hostname into WEATHER API k8s configuration
       command:
-        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}+g ../service-tracker/k8s/weather-api.yaml"
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/weather-api.yaml"
         warn: no
 
     - name: Merging Azure Container Registry hostname into Service Tracker UI k8s configuration
       command:
-        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}+g ../service-tracker/k8s/service-tracker-ui.yaml"
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/service-tracker-ui.yaml"
         warn: no
 
     - name: Create a k8s namespace in AKS for Service Tracker
@@ -84,4 +84,7 @@
         state: present
         namespace: default
         src: "../service-tracker/k8s/service-tracker-ui.yaml"
+
+    - debug:
+        msg: "Don't forget to run 'kubectl get svc' until you see the IP address of the cluster load balancer. Then connect to it on port 8080 via http."
 
