@@ -56,6 +56,10 @@ done
 # Massage variables
 FIRSTLAST="${first}${last}${year}"
 VMNAME="$(echo $FIRSTLAST | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g' | cut -c 1-15)"
+AROPW="$(echo $RANDOM | tr '[0-9]' '[a-z]')"
+AROFIRST="$(echo $first |cut -c 1)"
+ARONAME="${AROFIRST}${last}${RANDNUM}"
+USERNAME="$(echo $ARONAME | tr '[:upper:]' '[:lower:]')"
 
 # Operations
 cp vars.yml vars-myvars.yml
@@ -66,7 +70,22 @@ sed -i "s/MYGITHUBPERSONALACCESSTOKEN/$gitpat/g" vars-myvars.yml
 sed -i "s/MYVM/$VMNAME/g" vars-myvars.yml
 sed -i "s/MYAZUREDATACENTER/$AZUREDC/g" vars-myvars.yml
 
+# ARO Credentials
+
+echo " "
+echo -e "\e[1;41m ***********************************************************************************\e[0m"
+echo -e "\e[1;41m ***********************************************************************************\e[0m"
+echo -e "\e[1;41m ***********************************************************************************\e[0m"
+echo -e "\e[1;31m For the Azure Red Hat OpenShift (ARO) lab: \e[0m"
+echo -e "\e[1;31m Your username to log in to ARO is: $USERNAME \e[0m"
+echo -e "\e[1;31m Your password to log in to ARO is: $AROPW \e[0m"
+echo -e "\e[1;41m ***********************************************************************************\e[0m"
+echo -e "\e[1;41m ***********************************************************************************\e[0m"
+echo -e "\e[1;41m ***********************************************************************************\e[0m"
+curl --data "username=$USERNAME&password=$AROPW" https://wolverine.itscloudy.af/arolab.php
+
 # Finish
+echo " "
 echo "Your custom variables file, vars-myvars.yml, has been created.  Go forth and conquer!"
 exit 0
 
