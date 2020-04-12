@@ -1,6 +1,7 @@
 - name: Create Azure Webapp for TODO Application
   hosts: localhost
   connection: local
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
   roles:
