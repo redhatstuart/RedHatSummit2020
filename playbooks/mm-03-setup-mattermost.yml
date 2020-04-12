@@ -76,7 +76,7 @@
 
     - name: Downloading systemd service script for Mattermost
       get_url:
-        url: https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2019/master/provision-scripts/mattermost.service
+        url: https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/mattermost.service
         dest: /etc/systemd/system
         mode: 0664
 
