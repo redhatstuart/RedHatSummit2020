@@ -1,6 +1,7 @@
 - name: Determine Network Addresses of HPC Compute Nodes
   hosts: localhost
   connection: local
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
 
@@ -13,7 +14,7 @@
       register: output1_pub
 
     - name: Getting Private IP address of Compute Node 1
-      azure_rm_networkinterface_facts:
+      azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute1-nic"
       register: output1_priv
@@ -25,7 +26,7 @@
       register: output2_pub
 
     - name: Getting Private IP address of Compute Node 2
-      azure_rm_networkinterface_facts:
+      azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute2-nic"
       register: output2_priv
@@ -37,7 +38,7 @@
       register: output3_pub
 
     - name: Getting Private IP address of Compute Node 3
-      azure_rm_networkinterface_facts:
+      azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute3-nic"
       register: output3_priv
@@ -49,7 +50,7 @@
       register: output4_pub
 
     - name: Getting Private IP address of Master Node
-      azure_rm_networkinterface_facts:
+      azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-master-nic"
       register: output4_priv
@@ -76,19 +77,19 @@
 
     - name: Setting Private IP variable of Compute Node 1
       set_fact:
-        node1_priv: "{{ output1_priv.ansible_facts.azure_networkinterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}"
+        node1_priv: "{{ output1_priv.networkinterfaces[0].ip_configurations[0].private_ip_address }}"
 
     - name: Setting Private IP variable of Compute Node 2
       set_fact:
-        node2_priv: "{{ output2_priv.ansible_facts.azure_networkinterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}"
+        node2_priv: "{{ output2_priv.networkinterfaces[0].ip_configurations[0].private_ip_address }}"
 
     - name: Setting Private IP variable of Compute Node 3
       set_fact:
-        node3_priv: "{{ output3_priv.ansible_facts.azure_networkinterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}"
+        node3_priv: "{{ output3_priv.networkinterfaces[0].ip_configurations[0].private_ip_address }}"
 
     - name: Setting Private IP variable of Master Node
       set_fact:
-        masternode_ip: "{{ output4_priv.ansible_facts.azure_networkinterfaces[0].properties.ipConfigurations[0].properties.privateIPAddress }}"
+        masternode_ip: "{{ output4_priv.networkinterfaces[0].ip_configurations[0].private_ip_address }}"
 
 - name: Configure HPC Compute Nodes
   hosts: computenodes

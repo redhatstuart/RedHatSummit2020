@@ -1,6 +1,7 @@
 - name: Deploy AKS Infrastructure to support K8S Service Tracker Application
   hosts: localhost
   connection: local
+  no_log: false
   vars_files:
     - ./vars-myvars.yml
   roles:
@@ -28,4 +29,4 @@
       register: aks_output
 
     - debug:
-        msg: "The name of your AKS cluster is: {{ aks_output.name }}"
+        msg: "The name of your AKS cluster is: {{ aks_output.name }}. Please execute: 'az aks get-credentials -n {{ aks_output.name }} -g 01'"
