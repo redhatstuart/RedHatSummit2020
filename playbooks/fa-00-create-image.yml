@@ -47,7 +47,7 @@
                 - name: mySourceTrigger
                   sourceRepository: 
                     sourceControlType: Github
-                    repositoryUrl: https://github.com/{{ github_id }}/RedHatSummit2019
+                    repositoryUrl: https://github.com/{{ github_id }}/RedHatSummit2020
                     branch: master
                     sourceControlAuthProperties: 
                       tokenType: PAT

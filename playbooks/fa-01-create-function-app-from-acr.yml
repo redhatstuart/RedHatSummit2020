@@ -17,7 +17,7 @@
     - name: Create a Storage Account for Azure Function
       azure_rm_storageaccount:
         resource_group: "{{ resource_group }}"
-        name: "{{ vm_name | lower }}2019func"
+        name: "{{ vm_name | lower }}2020func"
         kind: StorageV2
         account_type: Standard_LRS
         tags:
@@ -36,7 +36,7 @@
       azure_rm_functionapp:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}functionapp"
-        storage_account: "{{ vm_name | lower }}2019func"
+        storage_account: "{{ vm_name | lower }}2020func"
         plan:
           resource_group: "{{ resource_group }}"
           name: "{{ vm_name }}-appservice-plan"

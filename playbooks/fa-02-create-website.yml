@@ -19,7 +19,7 @@
     - name: Create container $web and upload index.html
       azure_rm_storageblob:
         resource_group: "{{ resource_group }}"
-        storage_account_name: "{{ vm_name | lower }}2019func"
+        storage_account_name: "{{ vm_name | lower }}2020func"
         container: "$web"
         blob: "index.html"
         src: "../function-app-container/index.html"
