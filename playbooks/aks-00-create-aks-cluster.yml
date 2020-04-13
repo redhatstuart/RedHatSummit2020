@@ -29,4 +29,4 @@
       register: aks_output
 
     - debug:
-        msg: "The name of your AKS cluster is: {{ aks_output.name }}. Please execute: 'az aks get-credentials -n {{ aks_output.name }} -g 01'"
+        msg: "The name of your AKS cluster is: {{ aks_output.name }}. Please execute: 'az aks get-credentials -n {{ aks_output.name }} -g {{ resource_group }}'"
