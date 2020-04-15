@@ -107,5 +107,5 @@
 
     - name: Dump Mattermost FQDN
       debug:
-        msg: "Mattermost Server FQDN: http://{{ hostvars['localhost']['mmfqdn'] }}:8065"
+        msg: "Mattermost Server FQDN: http://{{ hostvars['localhost']['mmfqdn'] }}:8065 "
 

@@ -39,5 +39,5 @@
 
     - name: Dump Application Gateway Public IP
       debug:
-        msg: "Mattermost App Gateway FQDN: http://{{ output.publicipaddresses[0].dns_settings.fqdn }}"
+        msg: "Mattermost App Gateway FQDN: http://{{ output.publicipaddresses[0].dns_settings.fqdn }} "
 
