@@ -141,6 +141,10 @@ echo "**************************************************************************
         chown -R student:student /home/student/.local
         chmod a+rx /home/student/.local
         yum -y update
+        cd /usr/local/bin
+        wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/oc.tar.gz
+        tar xvfz oc.tar.gz
+        rm -f oc.tar
 
 echo "`date` --END-- Provisioning" >>/root/provision-script-output.log
 
