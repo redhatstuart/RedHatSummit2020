@@ -68,6 +68,7 @@ sed -i "s/MYGITHUBID/$githubid/g" vars-myvars.yml
 sed -i "s/MYGITHUBPERSONALACCESSTOKEN/$gitpat/g" vars-myvars.yml
 sed -i "s/MYVM/$VMNAME/g" vars-myvars.yml
 sed -i "s/MYAZUREDATACENTER/$AZUREDC/g" vars-myvars.yml
+sed -i "s/MYUSERNAME/$USERNAME/g" vars-myvars.yml
 
 # ARO Credentials
 
