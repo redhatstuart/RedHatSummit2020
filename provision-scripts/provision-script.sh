@@ -72,6 +72,7 @@ echo "**************************************************************************
 	yum -y install azure-cli >> /root/yum-output.log
 echo "********************************************************************************************"	
 	echo "`date` -- Installing MSSQL Tools" >>/root/provision-script-output.log
+        curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo
         runuser -l student -c "echo PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bash_profile"
         runuser -l student -c "echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc"
         ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
