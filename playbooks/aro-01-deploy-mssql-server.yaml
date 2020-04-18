@@ -18,23 +18,13 @@
       set_fact:
         aro_api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
 
-    - name: Create an Azure Red Hat Openshift (ARO) project for a simple K8s application
-      k8s:
-        name: "{{ aro_username }}-k8s"
-        host: "{{ aro_api_url }}"
-        username: "{{ aro_username }}"
-        api_key: "{{ aro_api_key }}"
-        api_version: v1
-        kind: Namespace
-        state: present
-
     - name: Create storage for Microsoft SQL Server
       k8s:
         host: "{{ aro_api_url }}"
         api_key: "{{ aro_api_key }}"
         api_version: v1
         state: present
-        namespace: "{{ aro_username }}-mssql"
+        namespace: "{{ aro_username }}-mssql-01"
         src: "../aro-mssql/pvc.yaml"
         wait: yes
         wait_timeout: 60
@@ -46,9 +36,9 @@
         api_key: "{{ aro_api_key }}"
         api_version: v1
         state: present
-        namespace: "{{ aro_username }}-mssql"
+        namespace: "{{ aro_username }}-mssql-01"
         src: "../aro-mssql/mssql.yaml"
 
     - debug:
-        msg: "Don't forget to run 'oc get svc' until you see the external IP address. Then run sqlcmd -S <External IP Address> -U sa -P Microsoft"
+        msg: "Don't forget to run 'oc get svc' until you see the external IP address."
 

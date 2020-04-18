@@ -30,7 +30,7 @@
 
     - name: Create an Azure Red Hat Openshift (ARO) project for Microsoft SQL Server
       k8s:
-        name: "{{ aro_username }}-mssql"
+        name: "{{ aro_username }}-mssql-01"
         host: "{{ aro_api_url }}"
         username: "{{ aro_username }}"
         api_key: "{{ aro_api_key }}"
