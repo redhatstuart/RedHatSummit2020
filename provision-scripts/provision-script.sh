@@ -71,12 +71,6 @@ echo "**************************************************************************
 	sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
 	yum -y install azure-cli >> /root/yum-output.log
 echo "********************************************************************************************"	
-	echo "`date` -- Installing MSSQL Tools" >>/root/provision-script-output.log
-        curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo
-        runuser -l student -c "echo PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bash_profile"
-        runuser -l student -c "echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc"
-        ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
-echo "********************************************************************************************"	
 	echo "`date` -- Setting default systemd target to graphical.target" >>/root/provision-script-output.log
 	systemctl set-default graphical.target >> /root/provision-script-output.log
 echo "********************************************************************************************"
@@ -151,6 +145,13 @@ echo "**************************************************************************
         wget -P /usr/local/bin https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/oc.tar.gz
         tar xvfz oc.tar.gz
         rm -f oc.tar.gz
+echo "********************************************************************************************"
+        echo "`date` -- Installing MSSQL Tools" >>/root/provision-script-output.log
+        curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo
+        runuser -l student -c "echo PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bash_profile"
+        runuser -l student -c "echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc"
+        ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
+echo "********************************************************************************************"
 
 echo "`date` --END-- Provisioning" >>/root/provision-script-output.log
 
