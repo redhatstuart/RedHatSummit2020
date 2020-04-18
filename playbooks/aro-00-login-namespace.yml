@@ -20,7 +20,17 @@
 
     - name: Create an Azure Red Hat Openshift (ARO) project for Source-To-Image Deploy
       k8s:
-        name: "s2i-{{ aro_username }}"
+        name: "{{ aro_username }}-s2i"
+        host: "{{ aro_api_url }}"
+        username: "{{ aro_username }}"
+        api_key: "{{ aro_api_key }}"
+        api_version: v1
+        kind: Namespace
+        state: present
+
+    - name: Create an Azure Red Hat Openshift (ARO) project for a simple K8s application
+      k8s:
+        name: "{{ aro_username }}-k8s"
         host: "{{ aro_api_url }}"
         username: "{{ aro_username }}"
         api_key: "{{ aro_api_key }}"
