@@ -1,0 +1,90 @@
+- name: Deploy Service Tracker Containers into Azure Kubernetes Service
+  hosts: localhost
+  connection: local
+  no_log: false
+  vars_files:
+    - ./vars-myvars.yml
+
+  tasks:
+
+    - name: "Query Azure Container Registry for credential information"
+      azure_rm_containerregistry_info:
+        name: "{{ vm_name }}{{ rnum }}acr"
+        resource_group: "{{ resource_group }}"
+        retrieve_credentials: "yes"
+      register: acr_output
+
+    - name: Merging Azure Container Registry hostname into DATA API k8s configuration
+      command:
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/data-api.yaml"
+        warn: no
+
+    - name: Merging Azure Container Registry hostname into FLIGHTS API k8s configuration
+      command:
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/flights-api.yaml"
+        warn: no
+
+    - name: Merging Azure Container Registry hostname into QUAKES API k8s configuration
+      command:
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/quakes-api.yaml"
+        warn: no
+
+    - name: Merging Azure Container Registry hostname into WEATHER API k8s configuration
+      command:
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/weather-api.yaml"
+        warn: no
+
+    - name: Merging Azure Container Registry hostname into Service Tracker UI k8s configuration
+      command:
+        cmd: "sed -i s+chzbrgr71+{{ acr_output.registries[0].login_server }}/aksdemo+g ../service-tracker/k8s/service-tracker-ui.yaml"
+        warn: no
+
+    - name: Create a k8s namespace in AKS for Service Tracker
+      k8s:
+        name: default
+        api_version: v1
+        kind: Namespace
+        state: present
+
+    - name: Apply MongoDB configuration to AKS and wait for it to come alive
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/mongodb.yaml"
+        wait: yes
+        wait_timeout: 60
+        wait_sleep: 5
+
+    - name: Apply DATA API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/data-api.yaml"
+
+    - name: Apply FLIGHTS API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/flights-api.yaml"
+
+    - name: Apply QUAKES API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/quakes-api.yaml"
+
+    - name: Apply WEATHER API configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/weather-api.yaml"
+
+    - name: Apply Service Tracker User Interface configuration to AKS
+      k8s:
+        state: present
+        namespace: default
+        src: "../service-tracker/k8s/service-tracker-ui.yaml"
+
+    - debug:
+        msg: "Don't forget to run 'kubectl get svc' until you see the IP address of the cluster load balancer. Then connect to it on port 8080 via http."
+
