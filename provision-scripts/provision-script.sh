@@ -147,10 +147,9 @@ echo "**************************************************************************
         rm -f oc.tar.gz
 echo "********************************************************************************************"
         echo "`date` -- Installing MSSQL Tools" >>/root/provision-script-output.log
-        curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo
-        runuser -l student -c "echo PATH="$PATH:/opt/mssql-tools/bin" >> ~/.bash_profile"
-        runuser -l student -c "echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc"
+        curl https://packages.microsoft.com/config/rhel/8/prod.repo > /etc/yum.repos.d/msprod.repo
         ACCEPT_EULA=Y yum install -y mssql-tools unixODBC-devel
+        echo "PATH=$PATH:/opt/mssql-tools/bin" >> /etc/profile
 echo "********************************************************************************************"
 
 echo "`date` --END-- Provisioning" >>/root/provision-script-output.log
