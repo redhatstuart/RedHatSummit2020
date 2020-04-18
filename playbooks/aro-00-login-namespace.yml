@@ -28,9 +28,9 @@
         kind: Namespace
         state: present
 
-    - name: Create an Azure Red Hat Openshift (ARO) project for a simple K8s application
+    - name: Create an Azure Red Hat Openshift (ARO) project for Microsoft SQL Server
       k8s:
-        name: "{{ aro_username }}-k8s"
+        name: "{{ aro_username }}-mssql"
         host: "{{ aro_api_url }}"
         username: "{{ aro_username }}"
         api_key: "{{ aro_api_key }}"
