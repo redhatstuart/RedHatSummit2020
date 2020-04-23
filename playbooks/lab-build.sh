@@ -29,6 +29,8 @@ echo -n "What is your GitHub ID:  > "
 read githubid
 echo -n "What is your GitHub Personal Access Token:  > "
 read gitpat
+echo -n "What is the Azure Red Hat OpenShift (ARO) API URL:  > "
+read aroapi
 
 echo " "
 
@@ -39,6 +41,7 @@ echo "Your last name is: $last"
 echo "You were born in: $year"
 echo "Your GitHub ID is: $githubid"
 echo "Your GitHub PAT is: $gitpat"
+echo "The ARO API URL is: $aroapi"
 
 echo " "
 
@@ -68,6 +71,8 @@ sed -i "s/MYGITHUBID/$githubid/g" vars-myvars.yml
 sed -i "s/MYGITHUBPERSONALACCESSTOKEN/$gitpat/g" vars-myvars.yml
 sed -i "s/MYVM/$VMNAME/g" vars-myvars.yml
 sed -i "s/MYAZUREDATACENTER/$AZUREDC/g" vars-myvars.yml
+sed -i "s/MYUSERNAME/$USERNAME/g" vars-myvars.yml
+sed -i "s+AROAPIURL+$aroapi+g" vars-myvars.yml
 
 # ARO Credentials
 

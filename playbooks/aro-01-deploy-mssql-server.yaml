@@ -1,0 +1,44 @@
+- name: Deploy Microsoft SQL Server to Azure Red Hat OpenShift
+  hosts: localhost
+  connection: local
+  no_log: false
+  vars_files:
+    - ./vars-myvars.yml
+
+  tasks:
+
+    - name: Log in to Azure Red Hat OpenShift (ARO)
+      k8s_auth:
+        host: "{{ aro_api_url }}"
+        username: "{{ aro_username }}"
+        password: "Microsoft"
+      register: k8s_auth_results
+
+    - name: Save API key variable
+      set_fact:
+        aro_api_key: "{{ k8s_auth_results.k8s_auth.api_key }}"
+
+    - name: Create storage for Microsoft SQL Server
+      k8s:
+        host: "{{ aro_api_url }}"
+        api_key: "{{ aro_api_key }}"
+        api_version: v1
+        state: present
+        namespace: "{{ aro_username }}-mssql-01"
+        src: "../aro-mssql/pvc.yaml"
+        wait: yes
+        wait_timeout: 60
+        wait_sleep: 5
+
+    - name: Deploy Microsoft SQL Server to Azure Red Hat OpenShift
+      k8s:
+        host: "{{ aro_api_url }}"
+        api_key: "{{ aro_api_key }}"
+        api_version: v1
+        state: present
+        namespace: "{{ aro_username }}-mssql-01"
+        src: "../aro-mssql/mssql.yaml"
+
+    - debug:
+        msg: "Don't forget to run 'oc get svc' until you see the external IP address."
+

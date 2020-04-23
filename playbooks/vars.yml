@@ -33,3 +33,6 @@ mysql_database_name: "mattermost"
 hp_infra_size: "Standard_D4s_v3"
 hp_compute_size: "Standard_A8"
 
+# ARO Lab Exercise
+aro_username: "MYUSERNAME"
+aro_api_url: "AROAPIURL"
