@@ -20,6 +20,7 @@
         name: "{{ vm_name | lower }}2020func"
         kind: StorageV2
         account_type: Standard_LRS
+        https_only: true
         tags:
           Tier: Development
           Venue: RedHatSummit
