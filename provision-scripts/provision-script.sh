@@ -29,11 +29,17 @@ echo "**************************************************************************
         sed -i "s/=enforcing/=disabled/g" /etc/selinux/config
         setenforce 0
         echo "plugins=0" >> /etc/dnf/dnf.conf
+        sed -i "s/remove=True/remove=False/g" /etc/dnf/dnf.conf
 	yum -y install drpm >> /root/yum-output.log
         yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
         yum -y install @python27 >> /root/yum-output.log
         yum -y install @development >> /root/yum-output.log
-        yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
+#        yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
+        yum -y group install "Server with GUI" >> /root/yum-output.log
+#        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
+        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin subscription-manager >>/root/yum-output.log
+        yum -y install tigervnc-server tigervnc >> /root/yum-output.log
+        yum -y update kernel >> /root/yum-output.log
         echo "student ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
         alternatives --set python /usr/bin/python2
         cd /usr/bin
@@ -59,7 +65,6 @@ echo "**************************************************************************
         runuser -l student -c "pip-2.7 install --upgrade --user pyOpenSSL"
         runuser -l student -c "pip-2.7 install --upgrade --user podman"
         runuser -l student -c "pip-2.7 install --user ansible==2.9.6"
-        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
         echo "[defaults]" > /home/student/.ansible.cfg
         echo "no_log = True" >> /home/student/.ansible.cfg
         echo "[ssh_connection]" >> /home/student/.ansible.cfg
@@ -75,7 +80,6 @@ echo "**************************************************************************
 	systemctl set-default graphical.target >> /root/provision-script-output.log
 echo "********************************************************************************************"
 	echo "`date` -- Installing noVNC environment" >>/root/provision-script-output.log
-	yum -y install tigervnc-server tigervnc >> /root/yum-output.log
         pip-2.7 install numpy websockify
         chmod -R a+rx /usr/lib64/python2.7/site-packages/numpy*
         chmod -R a+rx /usr/lib/python2.7/site-packages/websockify*
@@ -119,7 +123,6 @@ echo "**************************************************************************
         restorecon /home/student/.local/share/keyrings/Default.keyring
 echo "********************************************************************************************"
         wget -P /etc/yum.repos.d https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/mongodb-org-4.2.repo 
-        yum -y update kernel
         yum -y install mongodb-org 
         npm install pm2@latest -g
         systemctl enable mongod
@@ -140,7 +143,7 @@ echo "**************************************************************************
 echo "********************************************************************************************"
         chown -R student:student /home/student/.local
         chmod a+rx /home/student/.local
-        yum -y update
+#        yum -y update
         cd /usr/local/bin
         wget -P /usr/local/bin https://raw.githubusercontent.com/stuartatmicrosoft/RedHatSummit2020/master/provision-scripts/oc.tar.gz
         tar xvfz oc.tar.gz
