@@ -156,6 +156,8 @@ echo "`date` --END-- Provisioning" >>/root/provision-script-output.log
 
 echo "`date` Creating Student Desktop Credentials File" >>/root/provision-script-output.log
 
+mkdir /home/student/Desktop
+chown student:student /home/student/Desktop
 echo AZURE_USER_NAME=$AZ_USER_NAME >> /home/student/Desktop/credentials.txt
 echo AZURE_USER_PASSWORD=$AZ_USER_PASSWORD >> /home/student/Desktop/credentials.txt
 echo AZURE_CLIENT_ID=$SP_APP_ID >> /home/student/Desktop/credentials.txt
