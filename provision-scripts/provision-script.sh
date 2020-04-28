@@ -30,16 +30,16 @@ echo "**************************************************************************
         setenforce 0
         echo "plugins=0" >> /etc/dnf/dnf.conf
         sed -i "s/remove=True/remove=False/g" /etc/dnf/dnf.conf
-	yum -y install drpm >> /root/yum-output.log
-        yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
-        yum -y install @python27 >> /root/yum-output.log
-        yum -y install @development >> /root/yum-output.log
+#	yum -y install drpm >> /root/yum-output.log
+#        yum -y install python2-devel python2-pip libxslt-devel libffi-devel openssl-devel iptables arptables ebtables iptables-services telnet nodejs npm >> /root/yum-output.log
+#        yum -y install @python27 >> /root/yum-output.log
+#        yum -y install @development >> /root/yum-output.log
 #        yum -y group install "Server with GUI" --skip-broken >> /root/yum-output.log
-        yum -y group install "Server with GUI" >> /root/yum-output.log
+#        yum -y group install "Server with GUI" --nobest >> /root/yum-output.log
 #        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin PackageKit* subscription-manager >>/root/yum-output.log
-        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin subscription-manager >>/root/yum-output.log
-        yum -y install tigervnc-server tigervnc >> /root/yum-output.log
-        yum -y update kernel >> /root/yum-output.log
+#        yum -y remove rhn-check rhn-client-tools rhn-setup rhnlib rhnsd yum-rhn-plugin subscription-manager >>/root/yum-output.log
+#        yum -y install tigervnc-server tigervnc >> /root/yum-output.log
+#        yum -y update kernel >> /root/yum-output.log
         echo "student ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
         alternatives --set python /usr/bin/python2
         cd /usr/bin
