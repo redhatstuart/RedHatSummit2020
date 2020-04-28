@@ -1,6 +1,7 @@
 - name: Create a Docker container with function app
   hosts: localhost
   connection: local
+  no_log: false
   vars_files:
    - ./vars-myvars.yml
 
