@@ -62,7 +62,7 @@ echo "**************************************************************************
 	systemctl start iptables	
 echo "********************************************************************************************"
         echo "`date` -- Upgrading PIP and installing Ansible" >>/root/provision-script-output.log
-        runuser -l student -c "pip-2.7 install --upgrade --user selinux"
+#        runuser -l student -c "pip-2.7 install --upgrade --user selinux"
         runuser -l student -c "pip-2.7 install --upgrade --user python-dateutil"
         runuser -l student -c "pip-2.7 install --upgrade --user openshift"
         runuser -l student -c "pip-2.7 install --upgrade --user requests"
@@ -70,6 +70,7 @@ echo "**************************************************************************
         runuser -l student -c "pip-2.7 install --upgrade --user pyOpenSSL"
         runuser -l student -c "pip-2.7 install --upgrade --user podman"
         runuser -l student -c "pip-2.7 install --user ansible==2.9.6"
+        pip-2.7 install --upgrade selinux
         echo "[defaults]" > /home/student/.ansible.cfg
         echo "no_log = True" >> /home/student/.ansible.cfg
         echo "[ssh_connection]" >> /home/student/.ansible.cfg
