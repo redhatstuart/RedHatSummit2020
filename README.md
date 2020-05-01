@@ -29,7 +29,7 @@
 <p align="center">
 <a href="https://docs.microsoft.com/en-us/azure/openshift/howto-using-azure-redhat-openshift"><img src="images/Red-Hat-OpenShift-4_OG_1200x675.png" width="600"></a>
 
-Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) with contributions from [Jason DeLorme](https://github.com/ms-jasondel), [Joey Schluchter](https://github.com/jschluchter) and [Brian Redmond](https://github.com/chzbrgr71)
+Content created by: [Stuart Kirk](https://github.com/stuartatmicrosoft) & [Zim Kalinowski](https://github.com/zikalino) with contributions from [Jason DeLorme](https://github.com/ms-jasondel), [Joey Schluchter](https://github.com/jschluchter) and [Brian Redmond](https://github.com/chzbrgr71). Special thanks to [Michael Yen-Chi Ho](https://github.com/yenchiho) and [Manesh Raveendran](https://github.com/Manesh-R) from the marketing and infrastructure teams for their steadfast support and investments to make this lab possible!
 
 The content of this program can be re-delivered, on request, to any Microsoft customer seeking to deploy open source workloads on Azure.  Please contact stkirk@microsoft.com for additional details and to coordinate delivery of the program.
 </p>
