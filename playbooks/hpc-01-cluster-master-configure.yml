@@ -7,7 +7,7 @@
   tasks:
 
     - name: Getting Public IP address of Master HPC Infrastructure Node
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-master-pip-{{ rnum }}"
       register: output

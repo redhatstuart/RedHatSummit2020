@@ -6,21 +6,21 @@
   tasks:
 
     - name: Add VMSS Subnet to existing Virtual network
-      azure_rm_subnet:
+      azure.azcollection.azure_rm_subnet:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-vmss-subnet"
         address_prefix: "10.10.30.0/24"
         virtual_network: "{{ vm_name }}-mattermost-vnet"
 
     - name: Create Public IP Address for VMSS
-      azure_rm_publicipaddress:
+      azure.azcollection.azure_rm_publicipaddress:
         resource_group: "{{ resource_group }}"
         allocation_method: Static
         name: "{{ vm_name }}-mattermost-vmss-pip-{{ rnum }}"
         domain_name: "{{ vm_name }}-mattermost-vmss-{{ rnum }}"
 
     - name: Create Load Balancer for Mattermost VMSS
-      azure_rm_loadbalancer:
+      azure.azcollection.azure_rm_loadbalancer:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-lb-{{ rnum }}"
         frontend_ip_configurations:
@@ -52,7 +52,7 @@
             probe: prob0
 
     - name: Create VMSS
-      azure_rm_virtualmachinescaleset:
+      azure.azcollection.azure_rm_virtualmachinescaleset:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-vmss"
         vm_size: Standard_DS1_v2
@@ -75,13 +75,13 @@
         load_balancer: "{{ vm_name }}-mattermost-lb-{{ rnum }}"
 
     - name: Getting Public IP address of the LB
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-vmss-pip-{{ rnum }}"
       register: output
 
     - name: Add MySQL Firewall Rule
-      azure_rm_mysqlfirewallrule:
+      azure.azcollection.azure_rm_mysqlfirewallrule:
         resource_group: "{{ resource_group }}"
         server_name: "{{ vm_name }}-mattermost-mysql-{{ rnum }}"
         name: VMSS_Rule

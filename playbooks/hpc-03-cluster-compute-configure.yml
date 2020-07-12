@@ -8,49 +8,49 @@
   tasks:
 
     - name: Getting Public IP address of Compute Node 1
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute1-pip-{{ rnum }}"
       register: output1_pub
 
     - name: Getting Private IP address of Compute Node 1
-      azure_rm_networkinterface_info:
+      azure.azcollection.azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute1-nic"
       register: output1_priv
 
     - name: Getting Public IP address of Compute Node 2
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute2-pip-{{ rnum }}"
       register: output2_pub
 
     - name: Getting Private IP address of Compute Node 2
-      azure_rm_networkinterface_info:
+      azure.azcollection.azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute2-nic"
       register: output2_priv
 
     - name: Getting Public IP address of Compute Node 3
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute3-pip-{{ rnum }}"
       register: output3_pub
 
     - name: Getting Private IP address of Compute Node 3
-      azure_rm_networkinterface_info:
+      azure.azcollection.azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-compute3-nic"
       register: output3_priv
 
     - name: Getting Public IP address of Master Node
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-master-pip-{{ rnum }}"
       register: output4_pub
 
     - name: Getting Private IP address of Master Node
-      azure_rm_networkinterface_info:
+      azure.azcollection.azure_rm_networkinterface_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hpc-master-nic"
       register: output4_priv

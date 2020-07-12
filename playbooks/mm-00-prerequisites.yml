@@ -7,13 +7,13 @@
   tasks:
 
     - name: Create Mattermost Virtual Network
-      azure_rm_virtualnetwork:
+      azure.azcollection.azure_rm_virtualnetwork:
         resource_group: '{{ resource_group }}'
         name: "{{ vm_name }}-mattermost-vnet"
         address_prefixes: "10.10.0.0/16"
 
     - name: Create Mattermost Application Gateway Subnet
-      azure_rm_subnet:
+      azure.azcollection.azure_rm_subnet:
         resource_group: '{{ resource_group }}'
         name: "{{ vm_name }}-mattermost-ag-subnet"
         address_prefix: "10.10.40.0/24"
@@ -21,7 +21,7 @@
       register: subnet_output
 
     - name: Create Mattermost Application Gateway Public IP
-      azure_rm_publicipaddress:
+      azure.azcollection.azure_rm_publicipaddress:
         resource_group: "{{ resource_group }}" 
         allocation_method: Dynamic
         name: "{{ vm_name }}-mattermost-ag-pip-{{ rnum }}"
@@ -29,7 +29,7 @@
       register: pip_output
 
     - name: Create Mattermost Application Gateway (this will take roughly 15 mins.....)
-      azure_rm_appgateway:
+      azure.azcollection.azure_rm_appgateway:
         resource_group: "{{ resource_group }}"
         name: '{{ vm_name }}-mattermost-ag'
         sku:

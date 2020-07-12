@@ -9,7 +9,7 @@
   tasks:
     - name: Update VMSS to use Application Gateway instead of Load Balancer
       no_log: true
-      azure_rm_virtualmachinescaleset:
+      azure.azcollection.azure_rm_virtualmachinescaleset:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-vmss"
         vm_size: Standard_DS1_v2
@@ -32,7 +32,7 @@
         application_gateway: '{{ vm_name }}-mattermost-ag'
 
     - name: Getting FQDN of the Application Gateway
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-ag-pip-{{ rnum }}"
       register: output

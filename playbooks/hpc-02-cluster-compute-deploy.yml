@@ -7,7 +7,7 @@
   tasks:
 
   - name: Create Compute Node 1 NIC
-    azure_rm_networkinterface:
+    azure.azcollection.azure_rm_networkinterface:
       name: "{{ vm_name }}-hpc-compute1-nic"
       enable_accelerated_networking: no
       os_type: Linux
@@ -23,7 +23,7 @@
           private_ip_allocation_method: Dynamic
 
   - name: Create Compute Node 2 NIC
-    azure_rm_networkinterface:
+    azure.azcollection.azure_rm_networkinterface:
       name: "{{ vm_name }}-hpc-compute2-nic"
       enable_accelerated_networking: no
       os_type: Linux
@@ -39,7 +39,7 @@
           private_ip_allocation_method: Dynamic
 
   - name: Create Compute Node 3 NIC
-    azure_rm_networkinterface:
+    azure.azcollection.azure_rm_networkinterface:
       name: "{{ vm_name }}-hpc-compute3-nic"
       enable_accelerated_networking: no
       os_type: Linux
@@ -55,14 +55,14 @@
           private_ip_allocation_method: Dynamic
 
   - name: Create an availability set with default options
-    azure_rm_availabilityset:
+    azure.azcollection.azure_rm_availabilityset:
       name: "{{ vm_name }}-hpc-availset-{{ rnum }}"
       sku: Aligned
       state: present
       resource_group: "{{ resource_group }}"
 
   - name: Create HPC Compute Node 1 VM
-    azure_rm_virtualmachine:
+    azure.azcollection.azure_rm_virtualmachine:
       availability_set: "{{ vm_name }}-hpc-availset-{{ rnum }}"
       admin_username: "{{ admin_username }}"
       managed_disk_type: Standard_LRS
@@ -83,7 +83,7 @@
         version: 7.4.201807190
 
   - name: Create HPC Compute Node 2 VM
-    azure_rm_virtualmachine:
+    azure.azcollection.azure_rm_virtualmachine:
       availability_set: "{{ vm_name }}-hpc-availset-{{ rnum }}"
       admin_username: "{{ admin_username }}"
       managed_disk_type: Standard_LRS
@@ -104,7 +104,7 @@
         version: 7.4.201807190
 
   - name: Create HPC Compute Node 3 VM
-    azure_rm_virtualmachine:
+    azure.azcollection.azure_rm_virtualmachine:
       availability_set: "{{ vm_name }}-hpc-availset-{{ rnum }}"
       admin_username: "{{ admin_username }}"
       managed_disk_type: Standard_LRS

@@ -6,13 +6,13 @@
 
   tasks:
     - name: Stop Mattermost VM as required to generalize
-      azure_rm_virtualmachine:
+      azure.azcollection.azure_rm_virtualmachine:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-master"
         generalized: yes
 
     - name: Create a generalized disk image of the Mattermost VM
-      azure_rm_image:
+      azure.azcollection.azure_rm_image:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-disk-image"
         source: "{{ vm_name }}-mattermost-master"

@@ -8,7 +8,7 @@
   tasks:
 
     - name: Create an Azure Container Registry for AKS and Modernization Labs
-      azure_rm_containerregistry:
+      azure.azcollection.azure_rm_containerregistry:
         name: "{{ vm_name }}{{ rnum }}acr"
         resource_group: "{{ resource_group }}"
         admin_user_enabled: true
@@ -18,7 +18,7 @@
             Environment: RedHatSummit
 
     - name: "Query Azure Container Registry for credential information"
-      azure_rm_containerregistry_info:
+      azure.azcollection.azure_rm_containerregistry_info:
         name: "{{ vm_name }}{{ rnum }}acr"
         resource_group: "{{ resource_group }}"
         retrieve_credentials: "yes"

@@ -7,7 +7,7 @@
 
   tasks:
     - name: Get Mattermost Public IP Address Information
-      azure_rm_publicipaddress_info:
+      azure.azcollection.azure_rm_publicipaddress_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-mattermost-master-pip-{{ rnum }}"
       register: output

@@ -18,7 +18,7 @@
         replace: "{{ vm_name }}functionapp"
 
     - name: Create container $web and upload index.html
-      azure_rm_storageblob:
+      azure.azcollection.azure_rm_storageblob:
         resource_group: "{{ resource_group }}"
         storage_account_name: "{{ vm_name | lower }}2020func"
         container: "$web"

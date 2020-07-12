@@ -9,7 +9,7 @@
 
   tasks:
     - name: Create a managed Azure Container Services (AKS) instance to support K8S Service Tracker Application
-      azure_rm_aks:
+      azure.azcollection.azure_rm_aks:
         name: "{{ vm_name }}-aks"
         resource_group: "{{ resource_group }}"
         kubernetes_version: "1.15.12"

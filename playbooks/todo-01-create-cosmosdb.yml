@@ -10,7 +10,7 @@
   tasks:
 
     - name: Create Cosmos DB (MongoDB) for Red Hat Summit Labs
-      azure_rm_cosmosdbaccount:
+      azure.azcollection.azure_rm_cosmosdbaccount:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-cosmosdb"
         kind: mongo_db
@@ -25,7 +25,7 @@
         database_account_offer_type: Standard
 
     - name: Obtain CosmosDB Facts
-      azure_rm_cosmosdbaccount_info:
+      azure.azcollection.azure_rm_cosmosdbaccount_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-cosmosdb"
         retrieve_keys: all

@@ -8,7 +8,7 @@
   tasks:
 
     - name: Create an Azure Container Registry for Azure Function
-      azure_rm_containerregistry:
+      azure.azcollection.azure_rm_containerregistry:
         name: "{{ vm_name }}{{ rnum }}acr"
         resource_group: "{{ resource_group }}"
         admin_user_enabled: true
@@ -18,7 +18,7 @@
             Environment: RedHatSummit
            
     - name: Build Image using Azure Container Registry
-      azure_rm_resource:
+      azure.azcollection.azure_rm_resource:
         api_version: '2018-09-01'
         resource_group: "{{ resource_group }}"
         provider: containerregistry

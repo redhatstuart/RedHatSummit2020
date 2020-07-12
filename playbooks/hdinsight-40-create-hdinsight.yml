@@ -8,7 +8,7 @@
   tasks:
 
     - name: Create a Storage Account for HDInsight
-      azure_rm_storageaccount:
+      azure.azcollection.azure_rm_storageaccount:
         location: "{{ location }}"
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}2020hdi40"
@@ -19,7 +19,7 @@
       register: storage_create_output
 
     - name: Getting Storage Account Keys from Azure REST API
-      azure_rm_resource:
+      azure.azcollection.azure_rm_resource:
         api_version: '2018-07-01'
         method: POST
         resource_group: "{{ resource_group }}"
@@ -31,7 +31,7 @@
       register: storage_rest_output
 
     - name: Create Storage blob container for HDInsight data
-      azure_rm_storageblob:
+      azure.azcollection.azure_rm_storageblob:
         resource_group: "{{ resource_group }}"
         storage_account_name: "{{ vm_name }}2020hdi40"
         blob_type: block
@@ -39,7 +39,7 @@
       register: blob_output
 
     - name: Create HDInsight Cluster
-      azure_rm_hdinsightcluster:
+      azure.azcollection.azure_rm_hdinsightcluster:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}-hdinsight-cluster-40"
         location: "{{ location }}"

@@ -8,7 +8,7 @@
   tasks:
 
     - name: Create an Azure App Service Plan
-      azure_rm_appserviceplan:
+      azure.azcollection.azure_rm_appserviceplan:
         name: "{{ vm_name }}-appservice-plan"
         is_linux: true
         number_of_workers: 1
@@ -16,7 +16,7 @@
         sku: S1
 
     - name: Create a Storage Account for Azure Function
-      azure_rm_storageaccount:
+      azure.azcollection.azure_rm_storageaccount:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name | lower }}2020func"
         kind: StorageV2
@@ -28,14 +28,14 @@
       register: output
 
     - name: Obtain Azure Container Registry Facts
-      azure_rm_containerregistry_info:
+      azure.azcollection.azure_rm_containerregistry_info:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}{{ rnum }}acr"
         retrieve_credentials: true
       register: acr_output
 
     - name: Create container based function app
-      azure_rm_functionapp:
+      azure.azcollection.azure_rm_functionapp:
         resource_group: "{{ resource_group }}"
         name: "{{ vm_name }}functionapp"
         storage_account: "{{ vm_name | lower }}2020func"

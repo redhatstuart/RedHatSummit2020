@@ -8,7 +8,7 @@
   tasks:
 
     - name: "Query Azure Container Registry for credential information"
-      azure_rm_containerregistry_info:
+      azure.azcollection.azure_rm_containerregistry_info:
         name: "{{ vm_name }}{{ rnum }}acr"
         resource_group: "{{ resource_group }}"
         retrieve_credentials: "yes"

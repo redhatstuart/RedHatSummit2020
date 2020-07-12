@@ -6,27 +6,27 @@
 
   tasks:
   - name: Create Mattermost VNet
-    azure_rm_virtualnetwork:
+    azure.azcollection.azure_rm_virtualnetwork:
       resource_group: '{{ resource_group }}'
       name: "{{ vm_name }}-mattermost-vnet"
       address_prefixes: "10.10.0.0/16"
 
   - name: Create Mattermost Subnet
-    azure_rm_subnet:
+    azure.azcollection.azure_rm_subnet:
       resource_group: '{{ resource_group }}'
       name: "{{ vm_name }}-mattermost-subnet"
       address_prefix: "10.10.50.0/24"
       virtual_network: "{{ vm_name }}-mattermost-vnet"
 
   - name: Create Mattermost Server & Proxy VM Public IP Address
-    azure_rm_publicipaddress:
+    azure.azcollection.azure_rm_publicipaddress:
       resource_group: '{{ resource_group }}'
       name: "{{ vm_name }}-mattermost-master-pip-{{ rnum }}"
       allocation_method: Static
       domain_name: '{{ vm_name }}-mattermost-{{ rnum }}'
 
   - name: Create Mattermost Server & Proxy NSG
-    azure_rm_securitygroup:
+    azure.azcollection.azure_rm_securitygroup:
       resource_group: '{{ resource_group }}'
       name: '{{ vm_name }}-mattermost-nsg'
       rules:
@@ -44,7 +44,7 @@
             protocol: Tcp
 
   - name: Create Mattermost Server & Proxy VM NIC
-    azure_rm_networkinterface:
+    azure.azcollection.azure_rm_networkinterface:
       name: "{{ vm_name }}-mattermost-master-nic"
       os_type: Linux
       resource_group: '{{ resource_group }}'
@@ -60,7 +60,7 @@
 
 
   - name: Create Mattermost Server & Proxy VM
-    azure_rm_virtualmachine:
+    azure.azcollection.azure_rm_virtualmachine:
       admin_username: "{{ admin_username }}"
       managed_disk_type: Standard_LRS
       name: '{{ vm_name }}-mattermost-master'
