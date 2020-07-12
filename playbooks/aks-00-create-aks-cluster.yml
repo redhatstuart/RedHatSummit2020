@@ -12,7 +12,7 @@
       azure_rm_aks:
         name: "{{ vm_name }}-aks"
         resource_group: "{{ resource_group }}"
-        kubernetes_version: "1.15.7"
+        kubernetes_version: "1.15.12"
         dns_prefix: "{{ vm_name }}-dns"
         linux_profile:
           admin_username:  "{{ admin_username }}"
