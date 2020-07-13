@@ -15,7 +15,6 @@
         name: "{{ vm_name }}-cosmosdb"
         kind: mongo_db
         state: present
-        enable_aggregation_pipeline: true
         enable_multiple_write_locations: false
         consistency_policy:
           default_consistency_level: "consistent_prefix"
