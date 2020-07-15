@@ -29,7 +29,7 @@ echo -n "What is your GitHub ID:  > "
 read githubid
 echo -n "What is your GitHub Personal Access Token:  > "
 read gitpat
-echo -n "What is the Azure Red Hat OpenShift (ARO) API URL:  > "
+echo -n "What is the Azure Red Hat OpenShift (ARO) API URL (i.e. https://api.xxx.yyy.aroapp.io:6443):  > "
 read aroapi
 
 echo " "
